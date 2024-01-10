@@ -1,3 +1,4 @@
 **.hex
 **.zip
 .nvim.lua
+output/

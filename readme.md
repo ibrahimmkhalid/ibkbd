@@ -7,6 +7,11 @@ _Ibrahim's Keyboard_
 - Kailh Midnight Pro Silent Tactile Switches _(locally from [central computers](https://www.centralcomputer.com/))_
 - Pro Micro ATmega32U4 with type C port _(from [amazon](https://www.amazon.com/gp/product/B09J4MP1QK))_
 
+- IBKBD Mini
+    - Custom physical layout, PCB, Case, and keymap
+    - 3x5 + 3 (Inspired by Absolem and Corne keyboards)
+    - check ./ibkbd-mini/
+
 
 ![Final product](./assets/final.jpg)
 ![Keymap image](./assets/keymap.png)
