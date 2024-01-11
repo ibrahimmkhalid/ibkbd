@@ -1,10 +1,15 @@
+units:
+  p: 2
+  angle: -14
+  thumb_splay_angle: -10
+  mirror_dist: 1.25U
 points:
   zones:
     main:
-      rotate: -15
+      rotate: angle
       mirror: &mirror
         ref: main_inner_bottom
-        shift: 1.5U
+        shift: mirror_dist
       columns:
         pinky:
           key:
@@ -42,30 +47,71 @@ points:
     thumb:
       mirror: &mirror
         ref: main_inner_bottom
-        shift: 1.5U
+        shift: mirror_dist
       anchor:
         ref: main_inner_bottom
         shift: [-0.9U,-1.2U]
       columns:
         inner:
           key:
-            splay: -10
+            splay: thumb_splay_angle
             shift: [-6,0]
             column_net: P21
             mirror.column_net: P18
         mid:
           key:
-            splay: -10
+            splay: thumb_splay_angle
             shift: [-4,-2.5]
             column_net: P20
             mirror.column_net: P15
         outer:
           key:
-            splay: -10
-            shift: [-1.5,-4]
+            splay: thumb_splay_angle
+            shift: [-1.5,-4.7]
             column_net: P19
             mirror.column_net: P14
       rows:
         key:
           row_net: P9
           mirror.row_net: P4
+outlines:
+  padded_keys:
+    - what: rectangle
+      where: true
+      size: U + p
+  glue_block:
+    - what: polygon
+      points:
+        - ref: main_middle_top
+          shift: [0.5(U + p), 0.5(U + p)]
+        - ref: main_pinky_bottom
+          shift: [-0.5(U + p), -0.5(U + p)]
+        - ref: thumb_inner_key
+          shift: [-0.5(U + p), -0.5(U + p)]
+        - ref: thumb_outer_key
+          shift: [0.5(U + p), -0.5(U + p)]
+        - ref: mirror_thumb_outer_key
+          shift: [0.5(U + p), -0.5(U + p)]
+        - ref: mirror_thumb_inner_key
+          shift: [-0.5(U + p), -0.5(U + p)]
+        - ref: mirror_main_pinky_bottom
+          shift: [-0.5(U + p), -0.5(U + p)]
+        - ref: mirror_main_middle_top
+          shift: [0.5(U + p), 0.5(U + p)]
+  debug_view:
+    - what: rectangle
+      where: true
+      size: U
+      operation: stack
+    - what: outline
+      name: padded_keys
+      operation: stack
+    - what: outline
+      name: glue_block
+      operation: stack
+  main_outline:
+    - what: outline
+      name: padded_keys
+    - what: outline
+      name: glue_block
+  
