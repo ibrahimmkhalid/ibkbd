@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "make": "ergogen config.yml"
+  },
+  "dependencies": {
+    "ergogen": "github:ibrahimmkhalid/ergogen"
+  }
+}
