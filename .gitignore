@@ -2,3 +2,4 @@
 **.zip
 .nvim.lua
 output/
+node_modules/
