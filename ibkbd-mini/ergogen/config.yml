@@ -114,4 +114,8 @@ outlines:
       name: padded_keys
     - what: outline
       name: glue_block
+  ibkbd_pcb:
+    - what: outline
+      name: main_outline
+      fillet: 1
   
