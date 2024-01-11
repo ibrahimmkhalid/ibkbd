@@ -3,6 +3,8 @@ units:
   angle: -14
   thumb_splay_angle: -10
   mirror_dist: 1.25U
+  $default_spread: cx
+  $default_padding: cy
 points:
   zones:
     main:
