@@ -3,6 +3,7 @@ units:
   angle: -14
   thumb_splay_angle: -10
   mirror_dist: 1.25U
+  mount_radius: 1
   $default_spread: cx
   $default_padding: cy
 points:
@@ -116,10 +117,31 @@ outlines:
       name: padded_keys
     - what: outline
       name: glue_block
+  mounting:
+    - what: circle
+      radius: mount_radius
+      where:
+        - aggregate.parts:
+          - main_inner_top
+          - mirror_main_inner_top
+    - what: circle
+      radius: mount_radius
+      where:
+        - aggregate.parts:
+          - thumb_outer_key
+          - mirror_thumb_outer_key
+    - what: circle
+      radius: mount_radius
+      where: /^.*ring_home.*/
+      adjust:
+        shift: [-0.5*cx,0.5*cy]
   ibkbd_pcb:
     - what: outline
       name: main_outline
       fillet: 1
+    - what: outline
+      name: mounting
+      operation: subtract
 pcbs:
   ibkbd_pcb:
     outlines:
