@@ -15,26 +15,26 @@ points:
       columns:
         pinky:
           key:
-            column_net: P4
+            column_net: P5
             mirror.column_net: P9
         ring:
           key:
-            column_net: P5
+            column_net: P6
             mirror.column_net: P8
             stagger: 7
         middle:
           key:
-            column_net: P6
+            column_net: P7
             mirror.column_net: P7
             stagger: 7
         index:
           key:
-            column_net: P7
+            column_net: P8
             mirror.column_net: P6
             stagger: -7
         inner:
           key:
-            column_net: P8
+            column_net: P9
             mirror.column_net: P5
       rows:
         bottom:
@@ -74,7 +74,7 @@ points:
             mirror.column_net: P14
       rows:
         key:
-          row_net: P9
+          row_net: P4
           mirror.row_net: P4
 outlines:
   padded_keys:
@@ -120,4 +120,35 @@ outlines:
     - what: outline
       name: main_outline
       fillet: 1
-  
+pcbs:
+  ibkbd_pcb:
+    outlines:
+      ibkbd_pcb:
+        outline: ibkbd_pcb
+    footprints:
+      keys:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          hotswap: false
+          reverse: false
+          from: "{{colrow}}"
+          to: "{{column_net}}"
+      diodes:
+        what: diode
+        where: true
+        adjust:
+          rotate: 180
+          shift: [0, -5]
+        params:
+          from: "{{row_net}}"
+          to: "{{colrow}}"
+      promicro:
+        what: promicro
+        where:
+          aggregate.parts:
+            - main_inner_top
+            - mirror_main_inner_top
+          shift: [0,5]
+          rotate: -90
