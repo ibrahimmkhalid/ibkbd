@@ -9,7 +9,7 @@ inputs:
     required: true
 runs:
   using: 'docker'
-  image: 'docker://soundmonster/kicad-automation-scripts:latest'
+  image: 'docker://productize/kicad-automation-scripts:latest'
   entrypoint: '/bin/sh'
   args:
     - '-c'
