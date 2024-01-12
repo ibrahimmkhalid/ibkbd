@@ -48,11 +48,10 @@ points:
         shift: mirror_dist
       anchor:
         ref: main_inner_bottom
-        shift: [-0.9U,-1.2U]
+        shift: [-0.55U,-U]
       columns:
         inner:
           key:
-            splay: thumb_splay_angle
             shift: [-6,0]
             column_net: P21
             mirror.column_net: P18
