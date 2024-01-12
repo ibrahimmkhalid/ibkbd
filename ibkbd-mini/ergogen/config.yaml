@@ -117,17 +117,16 @@ outlines:
       radius: mount_radius
       where:
         - aggregate.parts:
-          - main_inner_top
-          - mirror_main_inner_top
-    - what: circle
-      radius: mount_radius
-      where:
-        - aggregate.parts:
           - thumb_outer_key
           - mirror_thumb_outer_key
     - what: circle
       radius: mount_radius
-      where: /^.*ring_home.*/
+      where: /^.*pinky_bottom.*/
+      adjust:
+        shift: [0.5*cx,0.5*cy]
+    - what: circle
+      radius: mount_radius
+      where: /^.*index_top.*/
       adjust:
         shift: [-0.5*cx,0.5*cy]
   ibkbd_mini_pcb:
