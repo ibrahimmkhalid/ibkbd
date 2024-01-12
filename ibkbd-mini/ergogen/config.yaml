@@ -130,7 +130,7 @@ outlines:
       where: /^.*ring_home.*/
       adjust:
         shift: [-0.5*cx,0.5*cy]
-  ibkbd_pcb:
+  ibkbd_mini_pcb:
     - what: outline
       name: main_outline
       fillet: 1
@@ -138,10 +138,10 @@ outlines:
       name: mounting
       operation: subtract
 pcbs:
-  ibkbd_pcb:
+  ibkbd_mini_pcb:
     outlines:
-      ibkbd_pcb:
-        outline: ibkbd_pcb
+      ibkbd_mini_pcb:
+        outline: ibkbd_mini_pcb
     footprints:
       keys:
         what: choc
