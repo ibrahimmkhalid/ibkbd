@@ -1,12 +1,12 @@
 on: [push, pull_request, workflow_dispatch]
 
-name: Build IBKBD Mini
+name: Build IBKBD Mini from ergogen
 jobs:
   generate:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./ibkbd-mini
+        working-directory: ./ibkbd-mini/ergogen
     name: Generate
     steps:
       - name: Checkout
