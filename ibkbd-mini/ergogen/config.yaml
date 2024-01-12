@@ -169,3 +169,23 @@ pcbs:
             - mirror_main_inner_top
           shift: [0,5]
           rotate: -90
+      battery:
+        what: jstph
+        where:
+          aggregate.parts:
+            - main_inner_top
+            - mirror_main_inner_top
+          shift: [0,-13]
+        params:
+          pos: batswitch
+          neg: GND
+      switch:
+        what: slider
+        where:
+          aggregate.parts:
+            - main_inner_top
+            - mirror_main_inner_top
+          shift: [15,19]
+        params:
+          from: batswitch
+          to: RAW
