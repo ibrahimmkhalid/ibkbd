@@ -4,6 +4,7 @@ units:
   thumb_splay_angle: -10
   mirror_dist: 1.25U
   mount_radius: 1
+  pU: U + p
   $default_spread: cx
   $default_padding: cy
 points:
@@ -75,26 +76,26 @@ outlines:
   padded_keys:
     - what: rectangle
       where: true
-      size: U + p
+      size: pU
   glue_block:
     - what: polygon
       points:
         - ref: main_middle_top
-          shift: [0.5(U + p), 0.5(U + p)]
+          shift: [0.5pU, 0.5pU]
         - ref: main_pinky_bottom
-          shift: [-0.5(U + p), -0.5(U + p)]
+          shift: [-0.5pU, -0.5pU]
         - ref: thumb_inner_key
-          shift: [-0.5(U + p), -0.5(U + p)]
+          shift: [-0.5pU, -0.5pU]
         - ref: thumb_outer_key
-          shift: [0.5(U + p), -0.5(U + p)]
+          shift: [0.5pU, -0.5pU]
         - ref: mirror_thumb_outer_key
-          shift: [0.5(U + p), -0.5(U + p)]
+          shift: [0.5pU, -0.5pU]
         - ref: mirror_thumb_inner_key
-          shift: [-0.5(U + p), -0.5(U + p)]
+          shift: [-0.5pU, -0.5pU]
         - ref: mirror_main_pinky_bottom
-          shift: [-0.5(U + p), -0.5(U + p)]
+          shift: [-0.5pU, -0.5pU]
         - ref: mirror_main_middle_top
-          shift: [0.5(U + p), 0.5(U + p)]
+          shift: [0.5pU, 0.5pU]
   debug_view:
     - what: rectangle
       where: true
