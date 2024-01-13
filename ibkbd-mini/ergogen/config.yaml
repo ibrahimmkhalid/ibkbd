@@ -7,6 +7,13 @@ units:
   pU: U + p
   $default_spread: cx
   $default_padding: cy
+  # todo: fix units with sane values
+  wall_height: 4
+  promicro_pos_x: 0
+  promicro_pos_y: 5
+  promicro_angle: -90
+  slider_pos_x: 15
+  slider_pos_y: 19
 points:
   zones:
     main:
@@ -73,11 +80,11 @@ points:
           row_net: P4
           mirror.row_net: P4
 outlines:
-  padded_keys:
+  _padded_keys:
     - what: rectangle
       where: true
       size: pU
-  glue_block:
+  _glue_block:
     - what: polygon
       points:
         - ref: main_middle_top
@@ -96,23 +103,47 @@ outlines:
           shift: [-0.5pU, -0.5pU]
         - ref: mirror_main_middle_top
           shift: [0.5pU, 0.5pU]
+  _promicro_slot:
+    - what: rectangle
+      size: [39, 18]
+      where: 
+        - aggregate.parts:
+            - main_inner_top
+            - mirror_main_inner_top
+          shift: [promicro_pos_x, promicro_pos_y]
+          rotate: promicro_angle
+  _slider_slot:
+    - what: rectangle
+      size: [8.5, 8.5]
+      where: 
+        - aggregate.parts:
+            - main_inner_top
+            - mirror_main_inner_top
+          shift: [slider_pos_x, slider_pos_y]
+          rotate: promicro_angle
   debug_view:
     - what: rectangle
       where: true
-      size: U
+      size: [cx, cy]
       operation: stack
     - what: outline
-      name: padded_keys
+      name: _padded_keys
       operation: stack
     - what: outline
-      name: glue_block
+      name: _glue_block
       operation: stack
-  main_outline:
     - what: outline
-      name: padded_keys
+      name: _promicro_slot
+      operation: stack
     - what: outline
-      name: glue_block
-  mounting:
+      name: _slider_slot
+      operation: stack
+  _base_outline:
+    - what: outline
+      name: _padded_keys
+    - what: outline
+      name: _glue_block
+  _pcb_drill:
     - what: circle
       radius: mount_radius
       where:
@@ -129,13 +160,80 @@ outlines:
       where: /^.*index_top.*/
       adjust:
         shift: [-0.5*cx,0.5*cy]
+  _case_standoff_heat_inserts:
+    - what: outline
+      name: _pcb_drill
+      expand: 1
+  _case_standoff:
+    - what: outline
+      name: _case_standoff_heat_inserts
+      expand: 2.5
+  _main_outline:
+    - what: outline
+      name: _base_outline
+      fillet: 1
+  _case_outline:
+    - what: outline
+      name: _main_outline
+      expand: 2
+  _wall_outline:
+    - what: outline
+      name: _case_outline
+    - what: outline
+      name: _main_outline
+      operation: subtract
+    - what: outline
+      name: _promicro_slot
+      operation: subtract
+      adjust.shift: [0,5]
+    - what: outline
+      name: _slider_slot
+      operation: subtract
+      adjust.shift: [0,5]
+  top_plate_outline:
+    - what: outline
+      name: _case_outline
+    - what: rectangle
+      size: [14, 14]
+      where: true
+      operation: subtract
+    - what: outline
+      name: _pcb_drill
+      operation: subtract
+    - what: outline
+      name: _promicro_slot
+      operation: subtract
+    - what: outline
+      name: _promicro_slot
+      adjust.shift: [0,5]
+      operation: subtract
   ibkbd_mini_pcb:
     - what: outline
-      name: main_outline
-      fillet: 1
+      name: _main_outline
     - what: outline
-      name: mounting
+      name: _pcb_drill
       operation: subtract
+cases:
+  bottom_plate:
+    - what: outline
+      name: _case_outline
+    - what: outline
+      name: _case_standoff
+      operation: add
+      extrude: wall_height - 1
+    - what: outline
+      name: _case_standoff_heat_inserts
+      operation: subtract
+      extrude: wall_height - 2
+      shift: [0, 0, 1]
+    - what: outline
+      name: _wall_outline
+      extrude: wall_height
+      shift: [0, 0, 1]
+  top_plate:
+    - what: outline
+      name: top_plate_outline
+      extrude: 1.5
 pcbs:
   ibkbd_mini_pcb:
     outlines:
@@ -166,8 +264,8 @@ pcbs:
           aggregate.parts:
             - main_inner_top
             - mirror_main_inner_top
-          shift: [0,5]
-          rotate: -90
+          shift: [promicro_pos_x, promicro_pos_y]
+          rotate: promicro_angle
       battery:
         what: jstph
         where:
@@ -184,7 +282,7 @@ pcbs:
           aggregate.parts:
             - main_inner_top
             - mirror_main_inner_top
-          shift: [15,19]
+          shift: [slider_pos_x, slider_pos_y]
         params:
           from: batswitch
           to: RAW
