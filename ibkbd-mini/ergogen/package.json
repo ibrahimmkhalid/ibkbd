@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "make": "ergogen -d ."
+    "make": "ergogen -d . && for i in output/cases/*.jscad; do npx @jscad/cli@1 \"$i\" -of stla; done"
   },
   "dependencies": {
     "ergogen": "github:ergogen/ergogen"
