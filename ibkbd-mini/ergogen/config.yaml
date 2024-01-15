@@ -3,12 +3,19 @@ units:
   angle: -14
   thumb_splay_angle: -10
   mirror_dist: 1.25U
-  mount_radius: 1
   pU: U + p
   $default_spread: cx
   $default_padding: cy
-  # todo: fix units with sane values
-  wall_height: 4
+  m2_hole_radius: 1
+  m2_hole_insert_radius_expand: 1
+  m2_hole_standoff_radius_expand: 2
+  m2_height: 8 - 1.6 # total screw height - screw head height
+  pcb_thickness: 1.6
+  parts_clearance: 2.5
+  plate_thickness: 1.3
+  wall_height: (m2_height - pcb_thickness) + parts_clearance
+  wall_thickness: 2
+  switch_gap: 0.9
   promicro_pos_x: 0
   promicro_pos_y: 5
   promicro_angle: -90
@@ -105,7 +112,7 @@ outlines:
           shift: [0.5pU, 0.5pU]
   _promicro_slot:
     - what: rectangle
-      size: [39, 18]
+      size: [34, 18.5]
       where: 
         - aggregate.parts:
             - main_inner_top
@@ -145,29 +152,29 @@ outlines:
       name: _glue_block
   _pcb_drill:
     - what: circle
-      radius: mount_radius
+      radius: m2_hole_radius
       where:
         - aggregate.parts:
           - thumb_outer_key
           - mirror_thumb_outer_key
     - what: circle
-      radius: mount_radius
+      radius: m2_hole_radius
       where: /^.*pinky_bottom.*/
       adjust:
         shift: [0.5*cx,0.5*cy]
     - what: circle
-      radius: mount_radius
+      radius: m2_hole_radius
       where: /^.*index_top.*/
       adjust:
         shift: [-0.5*cx,0.5*cy]
   _case_standoff_heat_inserts:
     - what: outline
       name: _pcb_drill
-      expand: 1
+      expand: m2_hole_insert_radius_expand
   _case_standoff:
     - what: outline
       name: _case_standoff_heat_inserts
-      expand: 2.5
+      expand: m2_hole_standoff_radius_expand
   _main_outline:
     - what: outline
       name: _base_outline
@@ -175,17 +182,16 @@ outlines:
   _case_outline:
     - what: outline
       name: _main_outline
-      expand: 2
+      expand: wall_thickness
   _wall_outline:
     - what: outline
       name: _case_outline
     - what: outline
       name: _main_outline
       operation: subtract
+  _wall_cutout_for_slider:
     - what: outline
-      name: _promicro_slot
-      operation: subtract
-      adjust.shift: [0,5]
+      name: _wall_outline
     - what: outline
       name: _slider_slot
       operation: subtract
@@ -217,23 +223,29 @@ cases:
   bottom_plate:
     - what: outline
       name: _case_outline
+      extrude: wall_thickness
     - what: outline
       name: _case_standoff
       operation: add
-      extrude: wall_height - 1
+      extrude: wall_height - pcb_thickness - switch_gap
+      shift: [0, 0, wall_thickness]
     - what: outline
       name: _case_standoff_heat_inserts
       operation: subtract
-      extrude: wall_height - 2
-      shift: [0, 0, 1]
+      extrude: wall_height - pcb_thickness - switch_gap
+      shift: [0, 0, wall_thickness]
     - what: outline
       name: _wall_outline
+      extrude: wall_height - parts_clearance - pcb_thickness
+      shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _wall_cutout_for_slider
+      shift: [0, 0, wall_thickness]
       extrude: wall_height
-      shift: [0, 0, 1]
   top_plate:
     - what: outline
       name: top_plate_outline
-      extrude: 1.5
+      extrude: plate_thickness
 pcbs:
   ibkbd_mini_pcb:
     outlines:
@@ -276,6 +288,7 @@ pcbs:
         params:
           pos: batswitch
           neg: GND
+          side: B
       switch:
         what: slider
         where:
@@ -286,3 +299,4 @@ pcbs:
         params:
           from: batswitch
           to: RAW
+          side: B
