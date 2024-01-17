@@ -265,11 +265,10 @@ pcbs:
         what: diode
         where: true
         adjust:
-          rotate: 180
           shift: [0, -5]
         params:
-          from: "{{row_net}}"
-          to: "{{colrow}}"
+          to: "{{row_net}}"
+          from: "{{colrow}}"
       promicro:
         what: promicro
         where:
