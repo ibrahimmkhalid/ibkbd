@@ -24,6 +24,7 @@ units:
 points:
   zones:
     main:
+      anchor.shift: [100, -100]
       rotate: angle
       mirror: &mirror
         ref: main_inner_bottom
