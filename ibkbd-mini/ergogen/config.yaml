@@ -262,14 +262,23 @@ pcbs:
           reverse: false
           from: "{{colrow}}"
           to: "{{column_net}}"
-      diodes:
+      diodes_main:
         what: diode
-        where: true
+        where: /.*main_.*/
         adjust:
           shift: [0, -5]
         params:
           to: "{{row_net}}"
           from: "{{colrow}}"
+      diodes_thumb:
+        what: diode
+        where: /.*thumb_.*/
+        adjust:
+          shift: [0, -5]
+          rotate: 180
+        params:
+          to: "{{colrow}}"
+          from: "{{row_net}}"
       promicro:
         what: promicro
         where:
