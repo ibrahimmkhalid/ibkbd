@@ -20,7 +20,7 @@ units:
   promicro_pos_y: 5
   promicro_angle: -90
   slider_pos_x: 15
-  slider_pos_y: 19
+  slider_pos_y: 21
 points:
   zones:
     main:
