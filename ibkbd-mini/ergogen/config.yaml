@@ -129,23 +129,6 @@ outlines:
             - mirror_main_inner_top
           shift: [slider_pos_x, slider_pos_y]
           rotate: promicro_angle
-  debug_view:
-    - what: rectangle
-      where: true
-      size: [cx, cy]
-      operation: stack
-    - what: outline
-      name: _padded_keys
-      operation: stack
-    - what: outline
-      name: _glue_block
-      operation: stack
-    - what: outline
-      name: _promicro_slot
-      operation: stack
-    - what: outline
-      name: _slider_slot
-      operation: stack
   _base_outline:
     - what: outline
       name: _padded_keys
@@ -220,6 +203,49 @@ outlines:
     - what: outline
       name: _pcb_drill
       operation: subtract
+  debug_view:
+    - what: outline
+      name: _padded_keys
+      operation: stack
+    - what: outline
+      name: _glue_block
+      operation: stack
+    - what: outline
+      name: _promicro_slot
+      operation: stack
+    - what: outline
+      name: _slider_slot
+      operation: stack
+    - what: outline
+      name: _base_outline
+      operation: stack
+    - what: outline
+      name: _pcb_drill
+      operation: stack
+    - what: outline
+      name: _case_standoff_heat_inserts
+      operation: stack
+    - what: outline
+      name: _case_standoff
+      operation: stack
+    - what: outline
+      name: _main_outline
+      operation: stack
+    - what: outline
+      name: _case_outline
+      operation: stack
+    - what: outline
+      name: _wall_outline
+      operation: stack
+    - what: outline
+      name: _wall_cutout_for_slider
+      operation: stack
+    - what: outline
+      name: top_plate_outline
+      operation: stack
+    - what: outline
+      name: ibkbd_mini_pcb
+      operation: stack
 cases:
   bottom_plate:
     - what: outline
