@@ -204,6 +204,10 @@ outlines:
       name: _pcb_drill
       operation: subtract
   debug_view:
+    - what: rectangle
+      where: true
+      operation: stack
+      size: [cx, cy]
     - what: outline
       name: _padded_keys
       operation: stack
