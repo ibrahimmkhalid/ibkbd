@@ -150,7 +150,7 @@ outlines:
       radius: m2_hole_radius
       where: /^.*inner_top.*/
       adjust:
-        shift: [-0.5*cx,0.5*cy]
+        shift: [-0.5*cx,0.75*cy]
   _case_standoff_heat_inserts:
     - what: outline
       name: _pcb_drill
