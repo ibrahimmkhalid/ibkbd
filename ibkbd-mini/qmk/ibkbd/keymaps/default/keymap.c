@@ -36,6 +36,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /**/QK_BOOT        ,/**/KC_INS         ,/**/KC_SCRL        ,/**/KC_PAUS        ,/**/KC_NO          ,/*||*/KC_NO          ,/**/KC_VOLD        ,/**/KC_MUTE        ,/**/KC_VOLU        ,/**/KC_NO          ,/**/
     /**/KC_NO          ,/**/KC_APP         ,/**/KC_CAPS        ,/**/KC_PSCR        ,/**/KC_NO          ,/*||*/KC_NO          ,/**/KC_MPRV        ,/**/KC_MPLY        ,/**/KC_MNXT        ,/**/KC_NO          ,/**/
     /**/KC_NO          ,/**/KC_NO          ,/**/KC_NO          ,/**/KC_NO          ,/**/KC_NO          ,/*||*/KC_NO          ,/**/KC_NO          ,/**/KC_NO          ,/**/KC_NO          ,/**/KC_NO          ,/**/
-    /**/                                    /**/KC_NO          ,/**/KC_TRNS        ,/**/KC_NO          ,/*||*/KC_TRNS        ,/**/KC_ESC         ,/**/KC_NO           /**/                                    /**/
+    /**/                                    /**/KC_NO          ,/**/KC_TRNS        ,/**/KC_NO          ,/*||*/KC_NO          ,/**/KC_ESC         ,/**/KC_NO           /**/                                    /**/
     /**/)               /**/                /**/                /**/                /**/                /*||*/                /**/                /**/                /**/                /**/                /**/
 };
