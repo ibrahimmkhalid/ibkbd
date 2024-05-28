@@ -10,6 +10,7 @@ units:
   m2_hole_radius_case_bottom: 1.05
   m2_hole_radius_case_top: 1.9
   m2_hole_radius_case_gap: 0.85
+
   m2_hole_insert_radius_expand: 1
   m2_hole_standoff_radius_expand: 2
   m2_height: 8 - 1.6 # total screw height - screw head height
