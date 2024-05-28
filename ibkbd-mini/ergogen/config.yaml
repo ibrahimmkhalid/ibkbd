@@ -6,13 +6,18 @@ units:
   pU: U + p
   $default_spread: cx
   $default_padding: cy
-  m2_hole_radius: 1
+  m2_hole_radius_pcb: 1
+  m2_hole_radius_case_bottom: 1.05
+  m2_hole_radius_case_top: 1.9
+  m2_hole_radius_case_gap: 0.85
+
   m2_hole_insert_radius_expand: 1
   m2_hole_standoff_radius_expand: 2
   m2_height: 8 - 1.6 # total screw height - screw head height
   pcb_thickness: 1.6
   parts_clearance: 2.5
   plate_thickness: 1.3
+  plate_switch_hole: 13.9
   wall_height: (m2_height - pcb_thickness) + parts_clearance
   wall_thickness: 2
   switch_gap: 0.9
@@ -20,7 +25,7 @@ units:
   promicro_pos_y: 5
   promicro_angle: -90
   slider_pos_x: 15
-  slider_pos_y: 19
+  slider_pos_y: 21
 points:
   zones:
     main:
@@ -129,23 +134,6 @@ outlines:
             - mirror_main_inner_top
           shift: [slider_pos_x, slider_pos_y]
           rotate: promicro_angle
-  debug_view:
-    - what: rectangle
-      where: true
-      size: [cx, cy]
-      operation: stack
-    - what: outline
-      name: _padded_keys
-      operation: stack
-    - what: outline
-      name: _glue_block
-      operation: stack
-    - what: outline
-      name: _promicro_slot
-      operation: stack
-    - what: outline
-      name: _slider_slot
-      operation: stack
   _base_outline:
     - what: outline
       name: _padded_keys
@@ -153,21 +141,21 @@ outlines:
       name: _glue_block
   _pcb_drill:
     - what: circle
-      radius: m2_hole_radius
+      radius: m2_hole_radius_pcb
       where:
         - aggregate.parts:
           - thumb_outer_key
           - mirror_thumb_outer_key
     - what: circle
-      radius: m2_hole_radius
-      where: /^.*pinky_bottom.*/
+      radius: m2_hole_radius_pcb
+      where: /^.*ring_home.*/
       adjust:
-        shift: [0.5*cx,0.5*cy]
+        shift: [-0.5*cx,-0.5*cy]
     - what: circle
-      radius: m2_hole_radius
-      where: /^.*index_top.*/
+      radius: m2_hole_radius_pcb
+      where: /^.*inner_top.*/
       adjust:
-        shift: [-0.5*cx,0.5*cy]
+        shift: [-0.5*cx,0.75*cy]
   _case_standoff_heat_inserts:
     - what: outline
       name: _pcb_drill
@@ -176,6 +164,14 @@ outlines:
     - what: outline
       name: _case_standoff_heat_inserts
       expand: m2_hole_standoff_radius_expand
+  _case_standoff_case_top:
+    - what: outline
+      name: _pcb_drill
+      expand: m2_hole_radius_case_top - m2_hole_radius_pcb
+  _case_standoff_case_bottom:
+    - what: outline
+      name: _pcb_drill
+      expand: m2_hole_radius_case_bottom - m2_hole_radius_pcb
   _main_outline:
     - what: outline
       name: _base_outline
@@ -201,7 +197,7 @@ outlines:
     - what: outline
       name: _case_outline
     - what: rectangle
-      size: [14, 14]
+      size: [plate_switch_hole, plate_switch_hole]
       where: true
       operation: subtract
     - what: outline
@@ -220,6 +216,59 @@ outlines:
     - what: outline
       name: _pcb_drill
       operation: subtract
+  debug_view:
+    - what: rectangle
+      where: true
+      operation: stack
+      size: [cx, cy]
+    - what: outline
+      name: _padded_keys
+      operation: stack
+    - what: outline
+      name: _glue_block
+      operation: stack
+    - what: outline
+      name: _promicro_slot
+      operation: stack
+    - what: outline
+      name: _slider_slot
+      operation: stack
+    - what: outline
+      name: _base_outline
+      operation: stack
+    - what: outline
+      name: _pcb_drill
+      operation: stack
+    - what: outline
+      name: _case_standoff_heat_inserts
+      operation: stack
+    - what: outline
+      name: _case_standoff_case_top
+      operation: stack
+    - what: outline
+      name: _case_standoff_case_bottom
+      operation: stack
+    - what: outline
+      name: _case_standoff
+      operation: stack
+    - what: outline
+      name: _main_outline
+      operation: stack
+    - what: outline
+      name: _case_outline
+      operation: stack
+    - what: outline
+      name: _wall_outline
+      operation: stack
+    - what: outline
+      name: _wall_cutout_for_slider
+      operation: stack
+    - what: outline
+      name: top_plate_outline
+      operation: stack
+    - what: outline
+      name: ibkbd_mini_pcb
+      operation: stack
 cases:
   bottom_plate:
     - what: outline
@@ -247,18 +296,34 @@ cases:
     - what: outline
       name: top_plate_outline
       extrude: plate_thickness
+    - what: outline
+      name: _case_standoff_case_top
+      extrude: m2_hole_radius_case_gap
+      shift: [0, 0, plate_thickness - m2_hole_radius_case_gap]
+      operation: subtract
+    - what: outline
+      name: _case_standoff_case_bottom
+      extrude: plate_thickness
+      operation: subtract
 pcbs:
   ibkbd_mini_pcb:
     outlines:
       ibkbd_mini_pcb:
         outline: ibkbd_mini_pcb
     footprints:
+      via:
+        what: via
+        where: true
+        adjust:
+          shift: [0, 8]
+        params:
+          net: "{{column_net}}"
       keys:
         what: choc
         where: true
         params:
           keycaps: true
-          hotswap: false
+          hotswap: true
           reverse: false
           from: "{{colrow}}"
           to: "{{column_net}}"
