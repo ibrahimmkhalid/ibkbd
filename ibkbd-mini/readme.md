@@ -8,3 +8,5 @@ I wanted to create an ultra portable version of the IBKBD-Full. This version use
 
 #### In this project
 - ergogen config
+
+![Keymap image](./keymap.svg)
