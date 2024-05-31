@@ -6,17 +6,13 @@ units:
   pU: U + p
   $default_spread: cx
   $default_padding: cy
-  m2_hole_radius_pcb: 1
-  m2_hole_radius_case_bottom: 1.05
-  m2_hole_radius_case_top: 1.9
-  m2_hole_radius_case_gap: 0.85
-
+  m2_hole_radius_pcb: 1.1
   m2_hole_insert_radius_expand: 1
   m2_hole_standoff_radius_expand: 2
   m2_height: 8 - 1.6 # total screw height - screw head height
   pcb_thickness: 1.6
   parts_clearance: 2.5
-  plate_thickness: 1.3
+  plate_thickness: 1.2
   plate_switch_hole: 13.9
   wall_height: (m2_height - pcb_thickness) + parts_clearance
   wall_thickness: 2
@@ -164,14 +160,6 @@ outlines:
     - what: outline
       name: _case_standoff_heat_inserts
       expand: m2_hole_standoff_radius_expand
-  _case_standoff_case_top:
-    - what: outline
-      name: _pcb_drill
-      expand: m2_hole_radius_case_top - m2_hole_radius_pcb
-  _case_standoff_case_bottom:
-    - what: outline
-      name: _pcb_drill
-      expand: m2_hole_radius_case_bottom - m2_hole_radius_pcb
   _main_outline:
     - what: outline
       name: _base_outline
@@ -243,12 +231,6 @@ outlines:
       name: _case_standoff_heat_inserts
       operation: stack
     - what: outline
-      name: _case_standoff_case_top
-      operation: stack
-    - what: outline
-      name: _case_standoff_case_bottom
-      operation: stack
-    - what: outline
       name: _case_standoff
       operation: stack
     - what: outline
@@ -296,15 +278,6 @@ cases:
     - what: outline
       name: top_plate_outline
       extrude: plate_thickness
-    - what: outline
-      name: _case_standoff_case_top
-      extrude: m2_hole_radius_case_gap
-      shift: [0, 0, plate_thickness - m2_hole_radius_case_gap]
-      operation: subtract
-    - what: outline
-      name: _case_standoff_case_bottom
-      extrude: plate_thickness
-      operation: subtract
 pcbs:
   ibkbd_mini_pcb:
     outlines:
