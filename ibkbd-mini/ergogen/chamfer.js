@@ -17,8 +17,8 @@ lines.forEach((line) => {
     let x = xy[0];
     let y = xy[1];
     let cyl = "new CSG.cylinder({" +
-      "  start: [" + x + "," + y + ","+ (1.2 - screwtop_height) +"]," +
-      "  end: [" + x + "," + y + "," + 1.2 + "]," +
+      "  start: [" + x + "," + y + ","+ (2 - screwtop_height) +"]," +
+      "  end: [" + x + "," + y + "," + 2 + "]," +
       "  radiusStart: " + screw_radius + "," +
       "  radiusEnd: " + screwtop_radius + "" +
       "})";
@@ -28,9 +28,9 @@ lines.forEach((line) => {
 
 let newlines = [];
 lines.forEach((line) => {
-  if (line.includes(")).extrude({ offset: [0, 0, 1.2] }")) {
+  if (line.includes(")).extrude({ offset: [0, 0, 2] }")) {
     let str = "";
-    str += ")).extrude({ offset: [0, 0, 1.2] }).subtract(\n";
+    str += ")).extrude({ offset: [0, 0, 2] }).subtract(\n";
     let first = true;
     cylinders.forEach((cyl) => {
       let unionstr = first ? ".union(\n" : ").union(\n";

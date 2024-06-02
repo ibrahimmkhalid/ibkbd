@@ -9,14 +9,15 @@ units:
   m2_hole_radius_pcb: 1.1
   m2_hole_insert_radius_expand: 1
   m2_hole_standoff_radius_expand: 2
-  m2_height: 8 - 1.6 # total screw height - screw head height
+  m2_height: 8 - 1.6 - 1.2 # total screw height - screw head height - adjustment
   pcb_thickness: 1.6
-  parts_clearance: 2.5
-  plate_thickness: 1.2
+  parts_clearance: 2.5 + 0.8
+  plate_thickness: 2
   plate_switch_hole: 13.9
   wall_height: (m2_height - pcb_thickness) + parts_clearance
   wall_thickness: 2
-  switch_gap: 0.9
+  switch_gap: 0.2
+  switch_clip_height: 0.8
   promicro_pos_x: 0
   promicro_pos_y: 5
   promicro_angle: -90
@@ -93,6 +94,10 @@ outlines:
     - what: rectangle
       where: true
       size: pU
+  _keys_clip:
+    - what: rectangle
+      where: true
+      size: plate_switch_hole + 0.8 
   _glue_block:
     - what: polygon
       points:
@@ -278,6 +283,10 @@ cases:
     - what: outline
       name: top_plate_outline
       extrude: plate_thickness
+    - what: outline
+      name: _keys_clip
+      extrude: switch_clip_height
+      operation: subtract
 pcbs:
   ibkbd_mini_pcb:
     outlines:
