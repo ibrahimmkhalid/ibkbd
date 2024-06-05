@@ -8,7 +8,7 @@ units:
   $default_padding: cy
   m2_hole_radius_pcb: 1.1
   m2_hole_insert_radius_expand: 1
-  m2_hole_standoff_radius_expand: 2
+  m2_hole_standoff_radius_expand: 1.5
   m2_height: 8 - 1.6 - 1.2 # total screw height - screw head height - adjustment
   pcb_thickness: 1.6
   parts_clearance: 2.5 + 0.8
@@ -165,6 +165,17 @@ outlines:
     - what: outline
       name: _case_standoff_heat_inserts
       expand: m2_hole_standoff_radius_expand
+    - what: circle
+      radius: 6*m2_hole_radius_pcb
+      where:
+        - aggregate.parts:
+          - main_inner_bottom
+          - mirror_main_inner_bottom
+    - what: circle
+      radius: 2*m2_hole_radius_pcb
+      where: /^.*(ring|middle|index|inner)_(top|bottom).*/
+      adjust:
+        shift: [-0.5*cx,-0.5*cy]
   _main_outline:
     - what: outline
       name: _base_outline
