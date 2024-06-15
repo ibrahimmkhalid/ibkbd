@@ -1,0 +1,3 @@
+[submodule "ibkbd-mini/zmk"]
+	path = ibkbd-mini/zmk
+	url = git@github.com:ibrahimmkhalid/zmk_testing.git
