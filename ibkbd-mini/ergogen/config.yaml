@@ -66,23 +66,23 @@ points:
         shift: mirror_dist
       anchor:
         ref: main_inner_bottom
-        shift: [-0.55U,-U]
+        shift: [-0.55U, -U]
       columns:
         inner:
           key:
-            shift: [-6,0]
+            shift: [-6, 0]
             column_net: P21
             mirror.column_net: P18
         mid:
           key:
             splay: thumb_splay_angle
-            shift: [-4,-2.5]
+            shift: [-4, -2.5]
             column_net: P20
             mirror.column_net: P15
         outer:
           key:
             splay: thumb_splay_angle
-            shift: [-1.5,-4.7]
+            shift: [-1.5, -4.7]
             column_net: P19
             mirror.column_net: P14
       rows:
@@ -97,7 +97,7 @@ outlines:
   _keys_clip:
     - what: rectangle
       where: true
-      size: plate_switch_hole + 0.8 
+      size: plate_switch_hole + 0.8
   _glue_block:
     - what: polygon
       points:
@@ -120,7 +120,7 @@ outlines:
   _promicro_slot:
     - what: rectangle
       size: [34, 18.5]
-      where: 
+      where:
         - aggregate.parts:
             - main_inner_top
             - mirror_main_inner_top
@@ -129,7 +129,7 @@ outlines:
   _slider_slot:
     - what: rectangle
       size: [8.5, 8.5]
-      where: 
+      where:
         - aggregate.parts:
             - main_inner_top
             - mirror_main_inner_top
@@ -145,18 +145,18 @@ outlines:
       radius: m2_hole_radius_pcb
       where:
         - aggregate.parts:
-          - thumb_outer_key
-          - mirror_thumb_outer_key
+            - thumb_outer_key
+            - mirror_thumb_outer_key
     - what: circle
       radius: m2_hole_radius_pcb
       where: /^.*ring_home.*/
       adjust:
-        shift: [-0.5*cx,-0.5*cy]
+        shift: [-0.5*cx, -0.5*cy]
     - what: circle
       radius: m2_hole_radius_pcb
       where: /^.*inner_top.*/
       adjust:
-        shift: [-0.5*cx,0.75*cy]
+        shift: [-0.5*cx, 0.75*cy]
   _case_standoff_heat_inserts:
     - what: outline
       name: _pcb_drill
@@ -169,13 +169,13 @@ outlines:
       radius: 6*m2_hole_radius_pcb
       where:
         - aggregate.parts:
-          - main_inner_bottom
-          - mirror_main_inner_bottom
+            - main_inner_bottom
+            - mirror_main_inner_bottom
     - what: circle
       radius: 2*m2_hole_radius_pcb
       where: /^.*(ring|middle|index|inner)_(top|bottom).*/
       adjust:
-        shift: [-0.5*cx,-0.5*cy]
+        shift: [-0.5*cx, -0.5*cy]
   _main_outline:
     - what: outline
       name: _base_outline
@@ -196,7 +196,7 @@ outlines:
     - what: outline
       name: _slider_slot
       operation: subtract
-      adjust.shift: [0,5]
+      adjust.shift: [0, 5]
   top_plate_outline:
     - what: outline
       name: _case_outline
@@ -212,7 +212,7 @@ outlines:
       operation: subtract
     - what: outline
       name: _promicro_slot
-      adjust.shift: [0,5]
+      adjust.shift: [0, 5]
       operation: subtract
   ibkbd_mini_pcb:
     - what: outline
@@ -351,7 +351,7 @@ pcbs:
           aggregate.parts:
             - main_inner_top
             - mirror_main_inner_top
-          shift: [0,-13]
+          shift: [0, -13]
         params:
           pos: batswitch
           neg: GND
