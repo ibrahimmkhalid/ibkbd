@@ -7,7 +7,7 @@ units:
   $default_spread: cx
   $default_padding: cy
   m2_hole_radius_pcb: 1.1
-  m2_hole_insert_radius_expand: 1
+  m2_hole_insert_radius_expand: 0.7
   m2_hole_standoff_radius_expand: 1.5
   m2_height: 8 - 1.6 - 1.2 # total screw height - screw head height - adjustment
   pcb_thickness: 1.6

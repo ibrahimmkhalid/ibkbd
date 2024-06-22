@@ -37,15 +37,15 @@ function _case_standoff_extrude_5_1000000000000005_outline_fn(){
 ).union(
     CAG.circle({"center":[81.2071618,-124.8545028],"radius":2.2})
 ).union(
-    CAG.circle({"center":[199.5468057,-84.3094463],"radius":3.6})
+    CAG.circle({"center":[199.5468057,-84.3094463],"radius":3.3})
 ).union(
-    CAG.circle({"center":[146.9693157,-84.3094463],"radius":3.6})
+    CAG.circle({"center":[146.9693157,-84.3094463],"radius":3.3})
 ).union(
-    CAG.circle({"center":[261.1962874,-108.3594755],"radius":3.6})
+    CAG.circle({"center":[261.1962874,-108.3594755],"radius":3.3})
 ).union(
-    CAG.circle({"center":[85.319834,-108.3594755],"radius":3.6})
+    CAG.circle({"center":[85.319834,-108.3594755],"radius":3.3})
 ).union(
-    CAG.circle({"center":[173.2580607,-162.5310063],"radius":3.6})
+    CAG.circle({"center":[173.2580607,-162.5310063],"radius":3.3})
 ).union(
     CAG.circle({"center":[173.2580607,-131.8480686],"radius":6.6})
 ).extrude({ offset: [0, 0, 5.1000000000000005] });
@@ -53,15 +53,15 @@ function _case_standoff_extrude_5_1000000000000005_outline_fn(){
 
 
 function _case_standoff_heat_inserts_extrude_5_1000000000000005_outline_fn(){
-    return CAG.circle({"center":[199.5468057,-84.3094463],"radius":2.1})
+    return CAG.circle({"center":[199.5468057,-84.3094463],"radius":1.8})
 .union(
-    CAG.circle({"center":[146.9693157,-84.3094463],"radius":2.1})
+    CAG.circle({"center":[146.9693157,-84.3094463],"radius":1.8})
 ).union(
-    CAG.circle({"center":[261.1962874,-108.3594755],"radius":2.1})
+    CAG.circle({"center":[261.1962874,-108.3594755],"radius":1.8})
 ).union(
-    CAG.circle({"center":[85.319834,-108.3594755],"radius":2.1})
+    CAG.circle({"center":[85.319834,-108.3594755],"radius":1.8})
 ).union(
-    CAG.circle({"center":[173.2580607,-162.5310063],"radius":2.1})
+    CAG.circle({"center":[173.2580607,-162.5310063],"radius":1.8})
 ).extrude({ offset: [0, 0, 5.1000000000000005] });
 }
 
