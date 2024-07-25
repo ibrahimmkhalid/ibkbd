@@ -9,7 +9,7 @@ else
 fi
 
 qmk compile -kb ibkbd -km "$km"
-qmk c2json -kb ibkbd -km default | keymap parse --layer-names __Base __Game __Nav __Num __Sym __Opt -c 10 -q - > keymap.yaml || true
+qmk c2json -kb ibkbd -km default | keymap parse --layer-names __Base __Game __GComp __Nav __Num __Sym __Opt -c 10 -q - > keymap.yaml || true
 keymap draw -j ibkbd/info.json keymap.yaml > keymap.svg || true
 mv keymap.svg ../ || true
 rm $QMK_HOME/keyboards/ibkbd
