@@ -131,7 +131,7 @@ outlines:
   #     radius: 2*m2_hole_radius_pcb
   #     where: /^.*(ring|middle|index|inner)_(top|bottom).*/
   #     adjust:
-  #       shift: [-0.5*cx, -0.5*cy]
+  #       shift: [-0.5*U, -0.5*U]
   _matrix_outline:
     - what: outline
       name: _base_outline
@@ -173,7 +173,7 @@ outlines:
     - what: rectangle
       where: true
       operation: stack
-      size: [cx, cy]
+      size: [U, U]
     - what: outline
       name: _padded_keys
       operation: stack
