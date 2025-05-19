@@ -68,7 +68,7 @@ points:
         gk3:
           key:
             shift: [U+6, 0]
-            rotate: 60
+            rotate: -30
       rows:
         thumb:
 outlines:
