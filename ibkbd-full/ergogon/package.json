@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "make": "ergogen -d . && ./chamfer.js && for i in ../3d-files/*.jscad; do npx @jscad/cli@1 \"$i\" -of stla; done"
+  },
+  "dependencies": {
+    "ergogen": "github:ergogen/ergogen"
+  }
+}
