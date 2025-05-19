@@ -66,7 +66,11 @@ points:
           key:
             spread: -U-3
             stagger: 0-3
-            splay: 30
+            rotate: 30
+        gk3:
+          key:
+            shift: [U+6, 0]
+            rotate: 60
       rows:
         thumb:
 outlines:
