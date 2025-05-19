@@ -85,10 +85,18 @@ outlines:
   _glue_block:
     - what: polygon
       points:
-        - ref: matrix_middle_num
-          shift: [0.5pU, 0.5pU]
-        - ref: matrix_pinky_bottom
+        - ref: matrix_outer_num
+          shift: [-0.5pU, 0.5pU + promicro_w + p]
+        - ref: matrix_outer_bottom
           shift: [-0.5pU, -0.5pU]
+        - ref: thumbfan_gk3_thumb
+          shift: [0.5pU, -0.5pU]
+        - ref: thumbfan_gk3_thumb
+          shift: [0.5pU, 0.5pU]
+        - ref: thumbfan_gk3_thumb
+          shift: [-0.5pU, 0.5pU]
+        - ref: matrix_extra_top
+          shift: [0.5pU, 0.5pU + promicro_w + 9 - 7 + p]
   _promicro_slot:
     - what: rectangle
       size: [promicro_l, promicro_w]
