@@ -100,23 +100,17 @@ outlines:
       name: _padded_keys
     - what: outline
       name: _glue_block
-  # _pcb_drill:
-  #   - what: circle
-  #     radius: m2_hole_radius_pcb
-  #     where:
-  #       - aggregate.parts:
-  #           - thumb_outer_key
-  #           - mirror_thumb_outer_key
-  #   - what: circle
-  #     radius: m2_hole_radius_pcb
-  #     where: /^.*ring_home.*/
-  #     adjust:
-  #       shift: [-0.5*cx, -0.5*cy]
-  #   - what: circle
-  #     radius: m2_hole_radius_pcb
-  #     where: /^.*inner_top.*/
-  #     adjust:
-  #       shift: [-0.5*cx, 0.75*cy]
+  _pcb_drill:
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where: /^.*ring_home.*/
+      adjust:
+        shift: [-0.5*U, -0.5*U]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where: /^.*inner_top.*/
+      adjust:
+        shift: [-0.5*U, 0.75*U]
   # _case_standoff_heat_inserts:
   #   - what: outline
   #     name: _pcb_drill
@@ -157,9 +151,9 @@ outlines:
       size: [plate_switch_hole, plate_switch_hole]
       where: true
       operation: subtract
-    # - what: outline
-    #   name: _pcb_drill
-    #   operation: subtract
+    - what: outline
+      name: _pcb_drill
+      operation: subtract
     - what: outline
       name: _promicro_slot
       operation: subtract
@@ -167,12 +161,12 @@ outlines:
       name: _promicro_slot
       adjust.shift: [0, 5]
       operation: subtract
-  # ibkbd_mini_pcb:
-  #   - what: outline
-  #     name: _matrix_outline
-  #   - what: outline
-  #     name: _pcb_drill
-  #     operation: subtract
+  ibkbd_gamer_pcb:
+    - what: outline
+      name: _matrix_outline
+    - what: outline
+      name: _pcb_drill
+      operation: subtract
   debug_view:
     - what: rectangle
       where: true
@@ -190,9 +184,9 @@ outlines:
     - what: outline
       name: _base_outline
       operation: stack
-    # - what: outline
-    #   name: _pcb_drill
-    #   operation: stack
+    - what: outline
+      name: _pcb_drill
+      operation: stack
     # - what: outline
     #   name: _case_standoff_heat_inserts
     #   operation: stack
@@ -211,9 +205,9 @@ outlines:
     - what: outline
       name: top_plate_outline
       operation: stack
-    # - what: outline
-    #   name: ibkbd_mini_pcb
-    #   operation: stack
+    - what: outline
+      name: ibkbd_gamer_pcb
+      operation: stack
 # cases:
 #   bottom_plate:
 #     - what: outline
