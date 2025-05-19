@@ -235,3 +235,49 @@ outlines:
 #       name: _keys_clip
 #       extrude: switch_clip_height
 #       operation: subtract
+pcbs:
+  ibkbd_gamer_pcb:
+    outlines:
+      ibkbd_gamer_pcb:
+        outline: ibkbd_gamer_pcb
+    footprints:
+      via:
+        what: via
+        where: true
+        adjust:
+          shift: [0, 8]
+        params:
+          net: "{{column_net}}"
+      keys:
+        what: mx
+        where: true
+        params:
+          keycaps: true
+          hotswap: true
+          reverse: false
+          from: "{{colrow}}"
+          to: "{{column_net}}"
+      diodes_matrix:
+        what: diode
+        where: /.*matrix_.*/
+        adjust:
+          shift: [0, -5]
+        params:
+          to: "{{row_net}}"
+          from: "{{colrow}}"
+      diodes_thumbfan:
+        what: diode
+        where: /.*thumbfan_.*/
+        adjust:
+          shift: [0, -5]
+          rotate: 180
+        params:
+          to: "{{colrow}}"
+          from: "{{row_net}}"
+      promicro:
+        what: promicro
+        where:
+          aggregate.parts:
+            - matrix_inner_top
+          shift: [promicro_pos_x, promicro_pos_y]
+          rotate: promicro_angle
