@@ -19,6 +19,8 @@ units:
   promicro_pos_x: 0
   promicro_pos_y: 5
   promicro_angle: -90
+  promicro_l: 36
+  promicro_w: 18.5
 points:
   zones:
     matrix:
@@ -89,7 +91,7 @@ outlines:
           shift: [-0.5pU, -0.5pU]
   _promicro_slot:
     - what: rectangle
-      size: [34, 18.5]
+      size: [promicro_l, promicro_w]
       where:
         - aggregate.parts:
             - matrix_inner_top
