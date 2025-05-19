@@ -64,12 +64,12 @@ points:
             stagger: U
         gk2:
           key:
-            spread: -U-3
-            stagger: 0-3
+            spread: -U-3.5
+            stagger: 0-2.5
             rotate: 30
         gk3:
           key:
-            shift: [U+6, 0]
+            shift: [U+7, 0]
             rotate: -30
       rows:
         thumb:
