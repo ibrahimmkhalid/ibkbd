@@ -19,8 +19,6 @@ units:
   promicro_pos_x: 0
   promicro_pos_y: 5
   promicro_angle: -90
-  slider_pos_x: 15
-  slider_pos_y: 21
 points:
   zones:
     matrix:
@@ -216,3 +214,30 @@ outlines:
     # - what: outline
     #   name: ibkbd_mini_pcb
     #   operation: stack
+# cases:
+#   bottom_plate:
+#     - what: outline
+#       name: _case_outline
+#       extrude: wall_thickness
+#     # - what: outline
+#     #   name: _case_standoff
+#     #   operation: add
+#     #   extrude: wall_height - pcb_thickness - switch_gap
+#     #   shift: [0, 0, wall_thickness]
+#     # - what: outline
+#     #   name: _case_standoff_heat_inserts
+#     #   operation: subtract
+#     #   extrude: wall_height - pcb_thickness - switch_gap
+#     #   shift: [0, 0, wall_thickness]
+#     - what: outline
+#       name: _wall_outline
+#       extrude: wall_height - parts_clearance - pcb_thickness
+#       shift: [0, 0, wall_thickness]
+#   top_plate:
+#     - what: outline
+#       name: top_plate_outline
+#       extrude: plate_thickness
+#     - what: outline
+#       name: _keys_clip
+#       extrude: switch_clip_height
+#       operation: subtract
