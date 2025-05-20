@@ -16,9 +16,8 @@ units:
   wall_thickness: 2
   switch_gap: 0.2
   switch_clip_height: 0.8
-  promicro_pos_x: 0
-  promicro_pos_y: 5
-  promicro_angle: -90
+  promicro_pos_x: U - 11
+  promicro_pos_y: U + 2
   promicro_l: 36
   promicro_w: 18.5
 points:
@@ -96,15 +95,13 @@ outlines:
         - ref: thumbfan_gk3_thumb
           shift: [-0.5pU, 0.5pU]
         - ref: matrix_extra_top
-          shift: [0.5pU, 0.5pU + promicro_w + 9 - 7 + p]
+          shift: [0.5pU, 0.5pU + promicro_w + 3 + p]
   _promicro_slot:
     - what: rectangle
-      size: [promicro_l, promicro_w]
+      size: [promicro_l + 5, promicro_w + 5]
       where:
-        - aggregate.parts:
-            - matrix_inner_top
-          shift: [promicro_pos_x, promicro_pos_y]
-          rotate: promicro_angle
+        ref: matrix_outer_num
+        shift: [promicro_pos_x - 2.5, promicro_pos_y + 2.5]
   _base_outline:
     - what: outline
       name: _padded_keys
@@ -166,10 +163,6 @@ outlines:
       operation: subtract
     - what: outline
       name: _promicro_slot
-      operation: subtract
-    - what: outline
-      name: _promicro_slot
-      adjust.shift: [0, 5]
       operation: subtract
   ibkbd_gamer_pcb:
     - what: outline
@@ -287,7 +280,5 @@ pcbs:
       promicro:
         what: promicro
         where:
-          aggregate.parts:
-            - matrix_inner_top
+          ref: matrix_outer_num
           shift: [promicro_pos_x, promicro_pos_y]
-          rotate: promicro_angle
