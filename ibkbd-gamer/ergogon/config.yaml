@@ -135,6 +135,7 @@ outlines:
     - what: circle
       radius: m2_hole_radius_pcb
       where:
+        - matrix_outer_num
         - matrix_outer_bottom
         - matrix_extra_home
         - thumbfan_far_thumb
