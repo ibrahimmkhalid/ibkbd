@@ -328,21 +328,12 @@ pcbs:
           to: "{{column_net}}"
       diodes_matrix:
         what: diode
-        where: /.*matrix_.*/
+        where: true
         adjust:
           shift: [0, -5]
         params:
           to: "{{row_net}}"
           from: "{{colrow}}"
-      diodes_thumbfan:
-        what: diode
-        where: /.*thumbfan_.*/
-        adjust:
-          shift: [0, -5]
-          rotate: 180
-        params:
-          to: "{{colrow}}"
-          from: "{{row_net}}"
       trrs:
         what: trrs
         where:
