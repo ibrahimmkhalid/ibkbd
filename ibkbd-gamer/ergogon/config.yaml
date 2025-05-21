@@ -20,6 +20,14 @@ units:
   promicro_pos_y: U + 2
   promicro_l: 36
   promicro_w: 18.5
+  trrs_l: 15
+  trrs_w: 6
+  trrs_pos_x: 4
+  trrs_pos_y: U + 6.5
+  trrs_angle: 360 - 76
+  trrs_angle_rad: trrs_angle * (pi / 180)
+  trrs_forward: 10
+  trrs_gap: 1
 points:
   zones:
     matrix:
@@ -102,6 +110,24 @@ outlines:
       where:
         ref: matrix_outer_num
         shift: [promicro_pos_x - 2.5, promicro_pos_y + 2.5]
+  _trrs_slot_orig:
+    - what: rectangle
+      size: [trrs_l, trrs_w]
+      where:
+        ref: matrix_extra_top
+        shift: [trrs_pos_x, trrs_pos_y]
+        rotate: trrs_angle
+  _trrs_slot:
+    - what: rectangle
+      size: [trrs_l + trrs_forward + trrs_gap, trrs_w + 2 * trrs_gap]
+      where:
+        ref: matrix_extra_top
+        shift:
+          [
+            trrs_pos_x - (trrs_forward - trrs_gap)/2 * cos(trrs_angle_rad),
+            trrs_pos_y - (trrs_forward - trrs_gap)/2 * sin(trrs_angle_rad),
+          ]
+        rotate: trrs_angle
   _base_outline:
     - what: outline
       name: _padded_keys
@@ -168,6 +194,9 @@ outlines:
     - what: outline
       name: _promicro_slot
       operation: subtract
+    - what: outline
+      name: _trrs_slot
+      operation: subtract
   ibkbd_gamer_pcb:
     - what: outline
       name: _matrix_outline
@@ -184,6 +213,12 @@ outlines:
       operation: stack
     - what: outline
       name: _glue_block
+      operation: stack
+    - what: outline
+      name: _trrs_slot_orig
+      operation: stack
+    - what: outline
+      name: _trrs_slot
       operation: stack
     - what: outline
       name: _promicro_slot
@@ -281,6 +316,17 @@ pcbs:
         params:
           to: "{{colrow}}"
           from: "{{row_net}}"
+      trrs:
+        what: trrs
+        where:
+          ref: matrix_extra_top
+          shift: [trrs_pos_x + 1.1, trrs_pos_y - -5.05]
+          rotate: trrs_angle + 90
+        params: # placeholder
+          A: GND
+          B: GND
+          C: GND
+          D: GND
       promicro:
         what: promicro
         where:
