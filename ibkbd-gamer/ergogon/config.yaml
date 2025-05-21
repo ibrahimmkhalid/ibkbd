@@ -323,7 +323,7 @@ pcbs:
         params:
           keycaps: true
           hotswap: true
-          reverse: false
+          reverse: true
           from: "{{colrow}}"
           to: "{{column_net}}"
       diodes_matrix:
