@@ -310,13 +310,6 @@ pcbs:
       ibkbd_gamer_pcb:
         outline: ibkbd_gamer_pcb
     footprints:
-      via:
-        what: via
-        where: true
-        adjust:
-          shift: [0, 8]
-        params:
-          net: "{{column_net}}"
       keys:
         what: mx
         where: true
