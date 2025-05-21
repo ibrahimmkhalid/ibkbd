@@ -110,33 +110,37 @@ outlines:
   _pcb_drill:
     - what: circle
       radius: m2_hole_radius_pcb
-      where: /^.*ring_home.*/
+      where:
+        - matrix_inner_home
+        - matrix_outer_home
+        - matrix_middle_top
+        - matrix_middle_bottom
+        - thumbfan_home_thumb
+      adjust:
+        shift: [0.5*U, 0.5*U]
+  _case_standoff_heat_inserts:
+    - what: outline
+      name: _pcb_drill
+      expand: m2_hole_insert_radius_expand
+  _case_standoff:
+    - what: outline
+      name: _case_standoff_heat_inserts
+      expand: m2_hole_standoff_radius_expand
+    - what: circle
+      radius: 6*m2_hole_radius_pcb
+      where:
+        - ref: thumbfan_near_thumb
+          shift: [-U, 0]
+    - what: circle
+      radius: 6*m2_hole_radius_pcb
+      where:
+        - ref: thumbfan_gk2_thumb
+          shift: [0, U]
+    - what: circle
+      radius: 2*m2_hole_radius_pcb
+      where: /^.*(pinky|ring|middle|inner|extra)_(num|bottom).*/
       adjust:
         shift: [-0.5*U, -0.5*U]
-    - what: circle
-      radius: m2_hole_radius_pcb
-      where: /^.*inner_top.*/
-      adjust:
-        shift: [-0.5*U, 0.75*U]
-  # _case_standoff_heat_inserts:
-  #   - what: outline
-  #     name: _pcb_drill
-  #     expand: m2_hole_insert_radius_expand
-  # _case_standoff:
-  #   - what: outline
-  #     name: _case_standoff_heat_inserts
-  #     expand: m2_hole_standoff_radius_expand
-  #   - what: circle
-  #     radius: 6*m2_hole_radius_pcb
-  #     where:
-  #       - aggregate.parts:
-  #           - matrix_inner_bottom
-  #           - mirror_matrix_inner_bottom
-  #   - what: circle
-  #     radius: 2*m2_hole_radius_pcb
-  #     where: /^.*(ring|middle|index|inner)_(top|bottom).*/
-  #     adjust:
-  #       shift: [-0.5*U, -0.5*U]
   _matrix_outline:
     - what: outline
       name: _base_outline
@@ -190,12 +194,12 @@ outlines:
     - what: outline
       name: _pcb_drill
       operation: stack
-    # - what: outline
-    #   name: _case_standoff_heat_inserts
-    #   operation: stack
-    # - what: outline
-    #   name: _case_standoff
-    #   operation: stack
+    - what: outline
+      name: _case_standoff_heat_inserts
+      operation: stack
+    - what: outline
+      name: _case_standoff
+      operation: stack
     - what: outline
       name: _matrix_outline
       operation: stack
@@ -211,33 +215,33 @@ outlines:
     - what: outline
       name: ibkbd_gamer_pcb
       operation: stack
-# cases:
-#   bottom_plate:
-#     - what: outline
-#       name: _case_outline
-#       extrude: wall_thickness
-#     # - what: outline
-#     #   name: _case_standoff
-#     #   operation: add
-#     #   extrude: wall_height - pcb_thickness - switch_gap
-#     #   shift: [0, 0, wall_thickness]
-#     # - what: outline
-#     #   name: _case_standoff_heat_inserts
-#     #   operation: subtract
-#     #   extrude: wall_height - pcb_thickness - switch_gap
-#     #   shift: [0, 0, wall_thickness]
-#     - what: outline
-#       name: _wall_outline
-#       extrude: wall_height - parts_clearance - pcb_thickness
-#       shift: [0, 0, wall_thickness]
-#   top_plate:
-#     - what: outline
-#       name: top_plate_outline
-#       extrude: plate_thickness
-#     - what: outline
-#       name: _keys_clip
-#       extrude: switch_clip_height
-#       operation: subtract
+cases:
+  bottom_plate:
+    - what: outline
+      name: _case_outline
+      extrude: wall_thickness
+    - what: outline
+      name: _case_standoff
+      operation: add
+      extrude: wall_height - pcb_thickness - switch_gap
+      shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _case_standoff_heat_inserts
+      operation: subtract
+      extrude: wall_height - pcb_thickness - switch_gap
+      shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _wall_outline
+      extrude: wall_height - parts_clearance + pcb_thickness
+      shift: [0, 0, wall_thickness]
+  top_plate:
+    - what: outline
+      name: top_plate_outline
+      extrude: plate_thickness
+    - what: outline
+      name: _keys_clip
+      extrude: switch_clip_height
+      operation: subtract
 pcbs:
   ibkbd_gamer_pcb:
     outlines:
