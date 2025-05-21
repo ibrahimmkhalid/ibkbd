@@ -31,12 +31,10 @@ units:
 points:
   zones:
     matrix:
-      anchor:
       columns:
         outer:
         pinky:
         ring:
-          key.origin: [-12, -19]
           key.stagger: 7
         middle:
           key.stagger: 7
