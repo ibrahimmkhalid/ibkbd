@@ -22,12 +22,12 @@ units:
   promicro_w: 18.5
   trrs_l: 15
   trrs_w: 6
-  trrs_pos_x: 4
-  trrs_pos_y: U + 6.5
+  trrs_pos_x: -2
+  trrs_pos_y: U + 9
   trrs_angle: 360 - 76
   trrs_angle_rad: trrs_angle * (pi / 180)
   trrs_forward: 10
-  trrs_gap: 1
+  trrs_gap: 2
 points:
   zones:
     matrix:
@@ -137,13 +137,35 @@ outlines:
     - what: circle
       radius: m2_hole_radius_pcb
       where:
-        - matrix_inner_home
-        - matrix_outer_home
-        - matrix_middle_top
-        - matrix_middle_bottom
-        - thumbfan_home_thumb
+        - matrix_outer_bottom
+        - matrix_extra_home
+        - thumbfan_far_thumb
       adjust:
         shift: [0.5*U, 0.5*U]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_index_bottom
+      adjust:
+        shift: [-0.5*U, -0.5*U]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_ring_num
+      adjust:
+        shift: [-7, 20]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_inner_num
+      adjust:
+        shift: [6.7, 20]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_extra_top
+      adjust:
+        shift: [7.3, 30]
   _case_standoff_heat_inserts:
     - what: outline
       name: _pcb_drill
@@ -153,10 +175,15 @@ outlines:
       name: _case_standoff_heat_inserts
       expand: m2_hole_standoff_radius_expand
     - what: circle
+      radius: 3*m2_hole_radius_pcb
+      where:
+        - ref: thumbfan_home_thumb
+          shift: [0, -U]
+    - what: circle
       radius: 6*m2_hole_radius_pcb
       where:
         - ref: thumbfan_near_thumb
-          shift: [-U, 0]
+          shift: [-U, -U/2]
     - what: circle
       radius: 6*m2_hole_radius_pcb
       where:
@@ -164,7 +191,7 @@ outlines:
           shift: [0, U]
     - what: circle
       radius: 2*m2_hole_radius_pcb
-      where: /^.*(pinky|ring|middle|inner|extra)_(num|bottom).*/
+      where: /^.*(pinky|middle|inner|extra)_(num|bottom).*/
       adjust:
         shift: [-0.5*U, -0.5*U]
   _matrix_outline:
