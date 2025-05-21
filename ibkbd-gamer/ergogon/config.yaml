@@ -31,6 +31,8 @@ units:
 points:
   zones:
     matrix:
+      anchor:
+        shift: [100, -150] # Fix KiCad placement
       columns:
         outer:
         pinky:
