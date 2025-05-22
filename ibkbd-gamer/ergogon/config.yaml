@@ -343,22 +343,11 @@ pcbs:
         outline: ibkbd_gamer_pcb
     footprints:
       keys:
-        what: mx
+        what: mx_with_diode
         where: true
         params:
-          keycaps: true
-          hotswap: true
-          reverse: true
-          from: "{{colrow}}"
+          from: "{{row_net}}"
           to: "{{column_net}}"
-      diodes_matrix:
-        what: diode
-        where: true
-        adjust:
-          shift: [0, -5]
-        params:
-          to: "{{row_net}}"
-          from: "{{colrow}}"
       trrs:
         what: trrs
         where:
@@ -377,10 +366,21 @@ pcbs:
         where:
           ref: matrix_outer_num
           shift: [promicro_pos_x, promicro_pos_y]
-      via:
-        what: via
-        where: true
-        adjust:
-          shift: [5.85, 8]
-        params:
-          net: "{{column_net}}"
+      # # for reference
+      # keys:
+      #   what: mx
+      #   where: true
+      #   params:
+      #     keycaps: true
+      #     hotswap: true
+      #     reverse: true
+      #     from: "{{colrow}}"
+      #     to: "{{column_net}}"
+      # diodes_matrix:
+      #   what: diode
+      #   where: true
+      #   adjust:
+      #     shift: [0, -5]
+      #   params:
+      #     to: "{{row_net}}"
+      #     from: "{{colrow}}"
