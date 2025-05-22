@@ -348,6 +348,7 @@ pcbs:
         params:
           from: "{{row_net}}"
           to: "{{column_net}}"
+          colrow: "{{colrow}}" # hack
       trrs:
         what: trrs
         where:
