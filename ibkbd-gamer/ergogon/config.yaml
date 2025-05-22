@@ -377,3 +377,10 @@ pcbs:
         where:
           ref: matrix_outer_num
           shift: [promicro_pos_x, promicro_pos_y]
+      via:
+        what: via
+        where: true
+        adjust:
+          shift: [5.85, 8]
+        params:
+          net: "{{column_net}}"
