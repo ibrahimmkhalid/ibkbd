@@ -35,47 +35,78 @@ points:
         shift: [100, -150] # Fix KiCad placement
       columns:
         outer:
+          key:
+            column_net: P5
         pinky:
+          key:
+            column_net: P6
         ring:
-          key.stagger: 7
+          key:
+            stagger: 7
+            column_net: P7
         middle:
-          key.stagger: 7
+          key:
+            stagger: 7
+            column_net: P8
         index:
-          key.stagger: -7
+          key:
+            stagger: -7
+            column_net: P9
         inner:
+          key:
+            column_net: P10
         extra:
-          key.stagger: 9
-          rows.num: $unset
+          key:
+            stagger: 9
+            column_net: P14
+          rows.bottom: $unset
       rows:
         bottom:
+          row_net: P15
         home:
+          row_net: P16
         top:
+          row_net: P18
         num:
+          row_net: P19
     thumbfan:
       anchor:
         ref: matrix_index_bottom
         shift: [4, -U]
       columns:
         near:
+          key:
+            column_net: P9
+            row_net: P20
         home:
           key:
+            column_net: P10
+            row_net: P20
             origin: [-U/2, -U/2]
             splay: -30
         far:
           key:
+            column_net: P10
+            row_net: P21
             origin: [-U/2, -U/2]
             splay: -30
         gk1:
           key:
+            column_net: P14
+            row_net: P20
             spread: 0
             stagger: U
         gk2:
           key:
+            column_net: P14
+            row_net: P15
             spread: -U-3.5
             stagger: 0-2.5
             rotate: 30
         gk3:
           key:
+            column_net: P14
+            row_net: P21
             shift: [U+7, 0]
             rotate: -30
       rows:
@@ -102,7 +133,7 @@ outlines:
           shift: [0.5pU, 0.5pU]
         - ref: thumbfan_gk3_thumb
           shift: [-0.5pU, 0.5pU]
-        - ref: matrix_extra_top
+        - ref: matrix_extra_num
           shift: [0.5pU, 0.5pU + promicro_w + 3 + p]
   _promicro_slot:
     - what: rectangle
@@ -114,14 +145,14 @@ outlines:
     - what: rectangle
       size: [trrs_l, trrs_w]
       where:
-        ref: matrix_extra_top
+        ref: matrix_extra_num
         shift: [trrs_pos_x, trrs_pos_y]
         rotate: trrs_angle
   _trrs_slot:
     - what: rectangle
       size: [trrs_l + trrs_forward + trrs_gap, trrs_w + 2 * trrs_gap]
       where:
-        ref: matrix_extra_top
+        ref: matrix_extra_num
         shift:
           [
             trrs_pos_x - (trrs_forward - trrs_gap)/2 * cos(trrs_angle_rad),
@@ -164,7 +195,7 @@ outlines:
     - what: circle
       radius: m2_hole_radius_pcb
       where:
-        - matrix_extra_top
+        - matrix_extra_num
       adjust:
         shift: [7.3, 30]
   _case_standoff_heat_inserts:
@@ -192,7 +223,7 @@ outlines:
           shift: [0, U]
     - what: circle
       radius: 2*m2_hole_radius_pcb
-      where: /^.*(pinky|middle|inner|extra)_(num|bottom).*/
+      where: /^.*(pinky|middle|inner)_(num|bottom).*/
       adjust:
         shift: [-0.5*U, -0.5*U]
   _matrix_outline:
@@ -331,14 +362,16 @@ pcbs:
       trrs:
         what: trrs
         where:
-          ref: matrix_extra_top
+          ref: matrix_extra_num
           shift: [trrs_pos_x + 1.1, trrs_pos_y - -5.05]
           rotate: trrs_angle + 90
-        params: # placeholder
+        params:
+          reverse: true
+          symmetric: true
           A: GND
           B: GND
-          C: GND
-          D: GND
+          C: P4
+          D: VCC
       promicro:
         what: promicro
         where:
