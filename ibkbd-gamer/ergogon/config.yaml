@@ -327,8 +327,17 @@ cases:
       shift: [0, 0, wall_thickness + wall_height - switch_gap]
   top_plate:
     - what: outline
+      name: _case_standoff
+      extrude: switch_gap
+    - what: outline
+      name: _case_standoff_heat_inserts
+      operation: subtract
+      extrude: switch_gap
+    - what: outline
       name: top_plate_outline
+      operation: add
       extrude: plate_thickness
+      shift: [0, 0, switch_gap]
 pcbs:
   ibkbd_gamer_pcb:
     outlines:
