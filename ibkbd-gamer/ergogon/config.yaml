@@ -320,6 +320,11 @@ cases:
       operation: subtract
       extrude: wall_height - pcb_thickness - switch_gap
       shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _trrs_slot
+      operation: subtract
+      extrude: 15
+      shift: [0, 0, wall_thickness + wall_height - switch_gap]
   top_plate:
     - what: outline
       name: top_plate_outline
