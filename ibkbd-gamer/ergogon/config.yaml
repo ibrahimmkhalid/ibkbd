@@ -1,8 +1,5 @@
 units:
   p: 2
-  angle: -14
-  thumb_splay_angle: -10
-  mirror_dist: 1.25U
   pU: U + p
   m2_hole_radius_pcb: 1.1
   m2_hole_insert_radius_expand: 0.7
@@ -10,12 +7,11 @@ units:
   m2_height: 8 - 1.6 - 1.2 # total screw height - screw head height - adjustment
   pcb_thickness: 1.6
   parts_clearance: 2.5 + 0.8
-  plate_thickness: 2
+  plate_thickness: 1.2
   plate_switch_hole: 13.9
-  wall_height: (m2_height - pcb_thickness) + parts_clearance
   wall_thickness: 2
-  switch_gap: 0.2
-  switch_clip_height: 0.8
+  switch_gap: 5 - plate_thickness
+  wall_height: m2_height + parts_clearance
   promicro_pos_x: U - 11
   promicro_pos_y: U + 2
   promicro_l: 36
@@ -116,10 +112,6 @@ outlines:
     - what: rectangle
       where: true
       size: pU
-  _keys_clip:
-    - what: rectangle
-      where: true
-      size: plate_switch_hole + 0.8
   _glue_block:
     - what: polygon
       points:
@@ -315,6 +307,10 @@ cases:
       name: _case_outline
       extrude: wall_thickness
     - what: outline
+      name: _wall_outline
+      extrude: wall_height
+      shift: [0, 0, wall_thickness]
+    - what: outline
       name: _case_standoff
       operation: add
       extrude: wall_height - pcb_thickness - switch_gap
@@ -324,18 +320,10 @@ cases:
       operation: subtract
       extrude: wall_height - pcb_thickness - switch_gap
       shift: [0, 0, wall_thickness]
-    - what: outline
-      name: _wall_outline
-      extrude: wall_height - parts_clearance + pcb_thickness
-      shift: [0, 0, wall_thickness]
   top_plate:
     - what: outline
       name: top_plate_outline
       extrude: plate_thickness
-    - what: outline
-      name: _keys_clip
-      extrude: switch_clip_height
-      operation: subtract
 pcbs:
   ibkbd_gamer_pcb:
     outlines:
