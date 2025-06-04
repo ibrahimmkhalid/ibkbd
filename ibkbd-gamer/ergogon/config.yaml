@@ -107,6 +107,10 @@ points:
       rows:
         thumb:
 outlines:
+  _true_keys_debug:
+    - what: rectangle
+      where: true
+      size: [18, 18]
   _padded_keys:
     - what: rectangle
       where: true
@@ -150,11 +154,7 @@ outlines:
             trrs_pos_y - (trrs_forward - trrs_gap)/2 * sin(trrs_angle_rad),
           ]
         rotate: trrs_angle
-  _base_outline:
-    - what: outline
-      name: _padded_keys
-    - what: outline
-      name: _glue_block
+  _base_outline: [_padded_keys, _glue_block]
   _pcb_drill:
     - what: circle
       radius: m2_hole_radius_pcb
@@ -230,87 +230,41 @@ outlines:
     - what: outline
       name: _matrix_outline
       expand: wall_thickness
-  _wall_outline:
-    - what: outline
-      name: _case_outline
-    - what: outline
-      name: _matrix_outline
-      operation: subtract
-  top_plate_outline:
-    - what: outline
-      name: _case_outline
+  _wall_outline: [_case_outline, -_matrix_outline]
+  _plate_switch_hole:
     - what: rectangle
       size: [plate_switch_hole, plate_switch_hole]
       where: true
-      operation: subtract
-    - what: outline
-      name: _top_plate_drill
-      operation: subtract
-    - what: outline
-      name: _promicro_slot
-      operation: subtract
-    - what: outline
-      name: _trrs_slot
-      operation: subtract
-  ibkbd_gamer_pcb:
-    - what: outline
-      name: _matrix_outline
-    - what: outline
-      name: _pcb_drill
-      operation: subtract
+  top_plate_outline:
+    [
+      _case_outline,
+      -_plate_switch_hole,
+      -_top_plate_drill,
+      -_promicro_slot,
+      -_trrs_slot,
+    ]
+  ibkbd_gamer_pcb: [_matrix_outline, -_pcb_drill]
   debug_view:
-    - what: rectangle
-      where: true
-      operation: stack
-      size: [U, U]
-    - what: outline
-      name: _padded_keys
-      operation: stack
-    - what: outline
-      name: _glue_block
-      operation: stack
-    - what: outline
-      name: _trrs_slot_orig
-      operation: stack
-    - what: outline
-      name: _trrs_slot
-      operation: stack
-    - what: outline
-      name: _promicro_slot
-      operation: stack
-    - what: outline
-      name: _base_outline
-      operation: stack
-    - what: outline
-      name: _pcb_drill
-      operation: stack
-    - what: outline
-      name: _top_plate_drill
-      operation: stack
-    - what: outline
-      name: _case_standoff_heat_inserts
-      operation: stack
-    - what: outline
-      name: _case_standoff_thru
-      operation: stack
-    - what: outline
-      name: _case_standoff
-      operation: stack
-    - what: outline
-      name: _matrix_outline
-      operation: stack
-    - what: outline
-      name: _case_outline
-      operation: stack
-    - what: outline
-      name: _wall_outline
-      operation: stack
-    - what: outline
-      name: top_plate_outline
-      operation: stack
-    - what: outline
-      name: ibkbd_gamer_pcb
-      operation: stack
+    [
+      ^_true_keys_debug,
+      ^_padded_keys,
+      ^_glue_block,
+      ^_promicro_slot,
+      ^_trrs_slot_orig,
+      ^_trrs_slot,
+      ^_base_outline,
+      ^_pcb_drill,
+      ^_top_plate_drill,
+      ^_case_standoff_heat_inserts,
+      ^_case_standoff_thru,
+      ^_case_standoff,
+      ^_matrix_outline,
+      ^_case_outline,
+      ^_wall_outline,
+      ^_plate_switch_hole,
+      ^top_plate_outline,
+      ^ibkbd_gamer_pcb,
+    ]
 cases:
   bottom_plate:
     - what: outline
