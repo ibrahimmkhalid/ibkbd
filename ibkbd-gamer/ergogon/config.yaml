@@ -1,17 +1,16 @@
 units:
   p: 2
   pU: U + p
-  m2_hole_radius_pcb: 1.1
-  m2_hole_insert_radius_expand: 0.7
-  m2_hole_standoff_radius_expand: 1.5
-  m2_height: 8 - 1.6 - 1.2 # total screw height - screw head height - adjustment
+  m2_screw_radius: 1.6 / 2 # diameter based on mcmaster 99461A913
+  m2_hole_radius_pcb: m2_screw_radius * 2.5 # enough plastic around screw to hold strongly
+  m2_hole_radius_plate_expand: m2_hole_radius_pcb - (m2_screw_radius + 0.05) # pcb radius - actual desired hole size (enough wiggle room for plate for easy screw inserting and removal)
+  m2_hole_radius_insert_expand: m2_hole_radius_pcb - 0.8 * m2_screw_radius # pcb radius - actual desired hole size (80% of screw width, so there is enough material to grab on to)
   pcb_thickness: 1.6
-  parts_clearance: 2.5 + 0.8
   plate_thickness: 1.2
   plate_switch_hole: 13.9
   wall_thickness: 2
-  switch_gap: 5 - plate_thickness
-  wall_height: m2_height + parts_clearance
+  switch_gap: 5 - plate_thickness # distance from the top of the pcb to the bottom of the plate
+  wall_height: 8 - plate_thickness + 0.6 # screw height - plate_thickness + adjustment to allow 2mm space under pcb
   promicro_pos_x: U - 11
   promicro_pos_y: U + 2
   promicro_l: 36
@@ -190,31 +189,36 @@ outlines:
         - matrix_extra_num
       adjust:
         shift: [7.3, 30]
+  _top_plate_drill:
+    - what: outline
+      name: _pcb_drill
+      expand: -m2_hole_radius_plate_expand
   _case_standoff_heat_inserts:
     - what: outline
       name: _pcb_drill
-      expand: m2_hole_insert_radius_expand
-  _case_standoff:
+      expand: -m2_hole_radius_insert_expand
+  _case_standoff_thru:
     - what: outline
-      name: _case_standoff_heat_inserts
-      expand: m2_hole_standoff_radius_expand
+      name: _pcb_drill
+      expand: -0.1
+  _case_standoff:
     - what: circle
-      radius: 3*m2_hole_radius_pcb
+      radius: 3
       where:
         - ref: thumbfan_home_thumb
           shift: [0, -U]
     - what: circle
-      radius: 6*m2_hole_radius_pcb
+      radius: 6
       where:
         - ref: thumbfan_near_thumb
           shift: [-U, -U/2]
     - what: circle
-      radius: 6*m2_hole_radius_pcb
+      radius: 6
       where:
         - ref: thumbfan_gk2_thumb
           shift: [0, U]
     - what: circle
-      radius: 2*m2_hole_radius_pcb
+      radius: 2
       where: /^.*(pinky|middle|inner)_(num|bottom).*/
       adjust:
         shift: [-0.5*U, -0.5*U]
@@ -240,7 +244,7 @@ outlines:
       where: true
       operation: subtract
     - what: outline
-      name: _pcb_drill
+      name: _top_plate_drill
       operation: subtract
     - what: outline
       name: _promicro_slot
@@ -281,7 +285,13 @@ outlines:
       name: _pcb_drill
       operation: stack
     - what: outline
+      name: _top_plate_drill
+      operation: stack
+    - what: outline
       name: _case_standoff_heat_inserts
+      operation: stack
+    - what: outline
+      name: _case_standoff_thru
       operation: stack
     - what: outline
       name: _case_standoff
@@ -316,9 +326,14 @@ cases:
       extrude: wall_height - pcb_thickness - switch_gap
       shift: [0, 0, wall_thickness]
     - what: outline
+      name: _case_standoff_thru
+      operation: add
+      extrude: wall_height
+      shift: [0, 0, wall_thickness]
+    - what: outline
       name: _case_standoff_heat_inserts
       operation: subtract
-      extrude: wall_height - pcb_thickness - switch_gap
+      extrude: wall_height
       shift: [0, 0, wall_thickness]
     - what: outline
       name: _trrs_slot
