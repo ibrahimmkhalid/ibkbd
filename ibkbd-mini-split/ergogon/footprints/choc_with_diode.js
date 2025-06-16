@@ -42,7 +42,7 @@ module.exports = {
     };
 
     const module = `
-      (module MXWD (layer F.Cu) (tedit 5DD4F656)
+      (module CHOCWD (layer F.Cu) (tedit 5DD4F656)
       ${p.at /* parametric position */}
 
       ${"" /* footprint reference */}
@@ -57,20 +57,20 @@ module.exports = {
       (fp_line (start 7 6) (end 7 7) (layer Dwgs.User) (width 0.15))
       (fp_line (start 7 -7) (end 6 -7) (layer Dwgs.User) (width 0.15))
       (fp_line (start 6 7) (end 7 7) (layer Dwgs.User) (width 0.15))
-      (fp_line (start 7 -7) (end 7 -6) (layer Dwgs.User) (width 0.15))
-    
+      (fp_line (start 7 -7) (end 7 -6) (layer Dwgs.User) (width 0.15))      
+
       ${"" /* keycap marks */}
-      (fp_line (start -9.5 -9.5) (end 9.5 -9.5) (layer Dwgs.User) (width 0.15))
-      (fp_line (start 9.5 -9.5) (end 9.5 9.5) (layer Dwgs.User) (width 0.15))
-      (fp_line (start 9.5 9.5) (end -9.5 9.5) (layer Dwgs.User) (width 0.15))
-      (fp_line (start -9.5 9.5) (end -9.5 -9.5) (layer Dwgs.User) (width 0.15))
-
+      (fp_line (start -9 -8.5) (end 9 -8.5) (layer Dwgs.User) (width 0.15))
+      (fp_line (start 9 -8.5) (end 9 8.5) (layer Dwgs.User) (width 0.15))
+      (fp_line (start 9 8.5) (end -9 8.5) (layer Dwgs.User) (width 0.15))
+      (fp_line (start -9 8.5) (end -9 -8.5) (layer Dwgs.User) (width 0.15))
+      
       ${"" /* middle shaft */}
-      (pad "" np_thru_hole circle (at 0 0) (size 3.9878 3.9878) (drill 3.9878) (layers *.Cu *.Mask))
-
+      (pad "" np_thru_hole circle (at 0 0) (size 3.429 3.429) (drill 3.429) (layers *.Cu *.Mask))
+        
       ${"" /* stabilizers */}
-      (pad "" np_thru_hole circle (at 5.08 0) (size 1.7018 1.7018) (drill 1.7018) (layers *.Cu *.Mask))
-      (pad "" np_thru_hole circle (at -5.08 0) (size 1.7018 1.7018) (drill 1.7018) (layers *.Cu *.Mask))
+      (pad "" np_thru_hole circle (at 5.5 0) (size 1.7018 1.7018) (drill 1.7018) (layers *.Cu *.Mask))
+      (pad "" np_thru_hole circle (at -5.5 0) (size 1.7018 1.7018) (drill 1.7018) (layers *.Cu *.Mask))
 
       ${"" /* diode symbols */}
       (fp_line (start 0.25 5) (end 0.75 5) (layer F.SilkS) (width 0.1))
@@ -93,19 +93,21 @@ module.exports = {
       (pad "" thru_hole circle (at 3.81 5 0) (size 1.905 1.905) (drill 0.9906) (layers *.Cu *.Mask) ${p.colrow})
 
       ${"" /* via */}
-      (pad 1 thru_hole circle (at 5.842 -8) (size 0.6 0.6) (drill 0.3) (layers *.Cu) (zone_connect 2) ${p.to})
+      (pad 1 thru_hole circle (at 0 -8) (size 0.6 0.6) (drill 0.3) (layers *.Cu) (zone_connect 2) ${p.to})
 
       ${"" /* holes */}
-      (pad "" np_thru_hole circle (at 2.54 -5.08) (size 3 3) (drill 3) (layers *.Cu *.Mask))
-      (pad "" np_thru_hole circle (at -3.81 -2.54) (size 3 3) (drill 3) (layers *.Cu *.Mask))
-      (pad "" np_thru_hole circle (at -2.54 -5.08) (size 3 3) (drill 3) (layers *.Cu *.Mask))
-      (pad "" np_thru_hole circle (at 3.81 -2.54) (size 3 3) (drill 3) (layers *.Cu *.Mask))
-      
+      (pad "" np_thru_hole circle (at 5 -3.75) (size 3 3) (drill 3) (layers *.Cu *.Mask))
+      (pad "" np_thru_hole circle (at 0 -5.95) (size 3 3) (drill 3) (layers *.Cu *.Mask))
+      (pad "" np_thru_hole circle (at -5 -3.75) (size 3 3) (drill 3) (layers *.Cu *.Mask))
+      (pad "" np_thru_hole circle (at 0 -5.95) (size 3 3) (drill 3) (layers *.Cu *.Mask))
+  
       ${"" /* net pads */}
-      (pad "" smd rect (at -7.085 -2.54 ${p.r}) (size 2.55 2.5) (layers B.Cu B.Paste B.Mask) ${p.colrow})
-      (pad "" smd rect (at 5.842 -5.08 ${p.r}) (size 2.55 2.5) (layers B.Cu B.Paste B.Mask) ${p.to})
-      (pad "" smd rect (at 7.085 -2.54 ${p.r}) (size 2.55 2.5) (layers F.Cu F.Paste F.Mask) ${p.colrow})
-      (pad "" smd rect (at -5.842 -5.08 ${p.r}) (size 2.55 2.5) (layers F.Cu F.Paste F.Mask) ${p.to})
+      (pad "" smd rect (at -3.275 -5.95 ${p.r}) (size 2.6 2.6) (layers B.Cu B.Paste B.Mask)  ${p.colrow})
+      (pad "" smd rect (at 8.275 -3.75 ${p.r}) (size 2.6 2.6) (layers B.Cu B.Paste B.Mask)  ${p.to})
+      (pad "" smd rect (at 3.275 -5.95 ${p.r}) (size 2.6 2.6) (layers F.Cu F.Paste F.Mask)  ${p.colrow})
+      (pad "" smd rect (at -8.275 -3.75 ${p.r}) (size 2.6 2.6) (layers F.Cu F.Paste F.Mask)  ${p.to})
+
+
       )`;
 
     const cleanNetForTrace = (net) => {
@@ -113,15 +115,18 @@ module.exports = {
     };
 
     const traces = `
-      (segment (start ${adjust_point(-5.842, -5.08)}) (end ${adjust_point(-2.922, -8)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.to)})
-      (segment (start ${adjust_point(-2.922, -8)}) (end ${adjust_point(5.842, -8)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.to)})
-      (segment (start ${adjust_point(5.842, -5.08)}) (end ${adjust_point(5.842, -8)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.to)})
-      (segment (start ${adjust_point(7.085, 1.725)}) (end ${adjust_point(3.81, 5)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.colrow)})
-      (segment (start ${adjust_point(7.085, -2.54)}) (end ${adjust_point(7.085, 1.725)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.colrow)})
-      (segment (start ${adjust_point(-7.085, 0.175)}) (end ${adjust_point(-4.28, 2.98)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
-      (segment (start ${adjust_point(-7.085, -2.54)}) (end ${adjust_point(-7.085, 0.175)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
-      (segment (start ${adjust_point(-4.28, 2.98)}) (end ${adjust_point(1.79, 2.98)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
-      (segment (start ${adjust_point(1.79, 2.98)}) (end ${adjust_point(3.81, 5)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(1.37, -4.045)}) (end ${adjust_point(1.37, -2.76)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(3.81, -0.32)}) (end ${adjust_point(3.81, 5)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(3.275, -5.95)}) (end ${adjust_point(1.37, -4.045)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(1.37, -2.76)}) (end ${adjust_point(3.81, -0.32)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(-0.08, -2.76)}) (end ${adjust_point(1.37, -2.76)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(-3.27, -5.95)}) (end ${adjust_point(-0.08, -2.76)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(1.37, -2.76)}) (end ${adjust_point(3.81, -0.32)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(3.81, -0.32)}) (end ${adjust_point(3.81, 5)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.colrow)})
+      (segment (start ${adjust_point(-4.025, -8)}) (end ${adjust_point(0, -8)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.to)})
+      (segment (start ${adjust_point(-8.275, -3.75)}) (end ${adjust_point(-4.025, -8)}) (width 0.25) (layer "F.Cu") ${cleanNetForTrace(p.to)})
+      (segment (start ${adjust_point(8.275, -3.75)}) (end ${adjust_point(4.025, -8)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.to)})
+      (segment (start ${adjust_point(4.025, -8)}) (end ${adjust_point(0, -8)}) (width 0.25) (layer "B.Cu") ${cleanNetForTrace(p.to)})
     `;
     return `
     ${module}
