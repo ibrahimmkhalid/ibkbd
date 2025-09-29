@@ -59,20 +59,20 @@ points:
         inner:
           key:
             shift: [-6, 0]
-            column_net: P21
+            column_net: P7
         mid:
           key:
             splay: thumb_splay_angle
             shift: [-4, -2.5]
-            column_net: P20
-        pinky:
+            column_net: P8
+        outer:
           key:
             splay: thumb_splay_angle
             shift: [-1.5, -4.7]
-            column_net: P19
+            column_net: P9
       rows:
         key:
-          row_net: P4
+          row_net: P18
 outlines:
   _true_keys_debug:
     - what: rectangle
@@ -91,9 +91,9 @@ outlines:
           shift: [-0.5pU, -0.5pU]
         - ref: matrix_pinky_bottom
           shift: [-0.5pU, -0.5pU - 3.5]
-        - ref: thumb_pinky_key
+        - ref: thumb_outer_key
           shift: [0.5pU, -0.5pU]
-        - ref: thumb_pinky_key
+        - ref: thumb_outer_key
           shift: [0.5pU, 0.5pU]
         - ref: matrix_inner_top
           shift: [0.5pU + 2p + promicro_w + 2.7, 0.5pU]
@@ -177,7 +177,7 @@ outlines:
       -_promicro_slot,
       -_slider_slot,
     ]
-  ibkbd_gamer_pcb: [_matrix_outline, -_pcb_drill]
+  ibkbd_mini_split_pcb: [_matrix_outline, -_pcb_drill]
   debug_view:
     [
       ^_true_keys_debug,
@@ -196,7 +196,7 @@ outlines:
       ^_wall_outline,
       ^_plate_switch_hole,
       ^top_plate_outline,
-      ^ibkbd_gamer_pcb,
+      ^ibkbd_mini_split_pcb,
     ]
 cases:
   bottom_plate:
@@ -232,10 +232,10 @@ cases:
       name: top_plate_outline
       extrude: plate_thickness
 pcbs:
-  ibkbd_gamer_pcb:
+  ibkbd_mini_split_pcb:
     outlines:
-      ibkbd_gamer_pcb:
-        outline: ibkbd_gamer_pcb
+      ibkbd_mini_split_pcb:
+        outline: ibkbd_mini_split_pcb
     footprints:
       keys:
         what: choc_with_diode
@@ -260,7 +260,7 @@ pcbs:
           pos: batswitch
           neg: GND
           side: F
-      switch:
+      switch_F:
         what: slider
         where:
           ref: matrix_inner_top
@@ -270,3 +270,13 @@ pcbs:
           from: batswitch
           to: RAW
           side: F
+      switch_B:
+        what: slider
+        where:
+          ref: matrix_inner_top
+          shift: [slider_pos_x, slider_pos_y]
+          rotate: -90
+        params:
+          from: batswitch
+          to: RAW
+          side: B
