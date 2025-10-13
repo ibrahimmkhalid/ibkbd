@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "make": "ergogen -d . && mkdir ../3d-files -p && for i in ./output/cases/*.jscad; do npx @jscad/cli@1 \"$i\" -of stla; done && cp ./output/cases/*.stl ../3d-files"
+  },
+  "dependencies": {
+    "ergogen": "github:ergogen/ergogen"
+  }
+}

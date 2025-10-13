@@ -1,0 +1,349 @@
+units:
+  p: 2
+  pU: U + p
+  m2_screw_radius: 1.6 / 2 # diameter based on mcmaster 99461A913
+  m2_hole_radius_pcb: m2_screw_radius * 2.5 # enough plastic around screw to hold strongly
+  m2_hole_radius_plate_expand: m2_hole_radius_pcb - (m2_screw_radius + 0.05) # pcb radius - actual desired hole size (enough wiggle room for plate for easy screw inserting and removal)
+  m2_hole_radius_insert_expand: m2_hole_radius_pcb - 0.8 * m2_screw_radius # pcb radius - actual desired hole size (80% of screw width, so there is enough material to grab on to)
+  pcb_thickness: 1.6
+  plate_thickness: 1.2
+  plate_switch_hole: 13.9
+  wall_thickness: 2
+  switch_gap: 5 - plate_thickness # distance from the top of the pcb to the bottom of the plate
+  wall_height: 8 - plate_thickness + 0.6 # screw height - plate_thickness + adjustment to allow 2mm space under pcb
+  promicro_pos_x: U - 11
+  promicro_pos_y: U + 2
+  promicro_l: 36
+  promicro_w: 18.5
+  trrs_l: 15
+  trrs_w: 6
+  trrs_pos_x: -2
+  trrs_pos_y: U + 9
+  trrs_angle: 360 - 76
+  trrs_angle_rad: trrs_angle * (pi / 180)
+  trrs_forward: 10
+  trrs_gap: 2
+points:
+  zones:
+    matrix:
+      anchor:
+        shift: [100, -150] # Fix KiCad placement
+      columns:
+        outer:
+          key:
+            column_net: P2
+        pinky:
+          key:
+            column_net: P3
+        ring:
+          key:
+            stagger: 7
+            column_net: P4
+        middle:
+          key:
+            stagger: 7
+            column_net: P5
+        index:
+          key:
+            stagger: -7
+            column_net: P6
+        inner:
+          key:
+            column_net: P7
+        extra:
+          key:
+            stagger: 9
+            column_net: P8
+          rows.bottom: $unset
+      rows:
+        bottom:
+          row_net: P15
+        home:
+          row_net: P14
+        top:
+          row_net: P16
+        num:
+          row_net: P10
+    thumbfan:
+      anchor:
+        ref: matrix_index_bottom
+        shift: [4, -U]
+      columns:
+        near:
+          key:
+            column_net: P6
+            row_net: P18
+        home:
+          key:
+            column_net: P7
+            row_net: P18
+            origin: [-U/2, -U/2]
+            splay: -30
+        far:
+          key:
+            column_net: P7
+            row_net: P19
+            origin: [-U/2, -U/2]
+            splay: -30
+        gk1:
+          key:
+            column_net: P8
+            row_net: P18
+            spread: 0
+            stagger: U
+        gk2:
+          key:
+            column_net: P8
+            row_net: P15
+            spread: -U-3.5
+            stagger: 0-2.5
+            rotate: 30
+        gk3:
+          key:
+            column_net: P8
+            row_net: P19
+            shift: [U+7, 0]
+            rotate: -30
+      rows:
+        thumb:
+outlines:
+  _true_keys_debug:
+    - what: rectangle
+      where: true
+      size: [18, 18]
+  _padded_keys:
+    - what: rectangle
+      where: true
+      size: pU
+  _glue_block:
+    - what: polygon
+      points:
+        - ref: matrix_outer_num
+          shift: [-0.5pU, 0.5pU + promicro_w + p]
+        - ref: matrix_outer_bottom
+          shift: [-0.5pU, -0.5pU]
+        - ref: thumbfan_gk3_thumb
+          shift: [0.5pU, -0.5pU]
+        - ref: thumbfan_gk3_thumb
+          shift: [0.5pU, 0.5pU]
+        - ref: thumbfan_gk3_thumb
+          shift: [-0.5pU, 0.5pU]
+        - ref: matrix_extra_num
+          shift: [0.5pU, 0.5pU + promicro_w + 3 + p]
+  _promicro_slot:
+    - what: rectangle
+      size: [promicro_l + 5, promicro_w + 5]
+      where:
+        ref: matrix_outer_num
+        shift: [promicro_pos_x - 2.5, promicro_pos_y + 2.5]
+  _trrs_slot_orig:
+    - what: rectangle
+      size: [trrs_l, trrs_w]
+      where:
+        ref: matrix_extra_num
+        shift: [trrs_pos_x, trrs_pos_y]
+        rotate: trrs_angle
+  _trrs_slot:
+    - what: rectangle
+      size: [trrs_l + trrs_forward + trrs_gap, trrs_w + 2 * trrs_gap]
+      where:
+        ref: matrix_extra_num
+        shift:
+          [
+            trrs_pos_x - (trrs_forward - trrs_gap)/2 * cos(trrs_angle_rad),
+            trrs_pos_y - (trrs_forward - trrs_gap)/2 * sin(trrs_angle_rad),
+          ]
+        rotate: trrs_angle
+  _base_outline: [_padded_keys, _glue_block]
+  _pcb_drill:
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_outer_num
+        - matrix_outer_bottom
+        - matrix_extra_home
+        - thumbfan_far_thumb
+      adjust:
+        shift: [0.5*U, 0.5*U]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_index_bottom
+      adjust:
+        shift: [-0.5*U, -0.5*U]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_ring_num
+      adjust:
+        shift: [-7, 20]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_inner_num
+      adjust:
+        shift: [6.7, 20]
+    - what: circle
+      radius: m2_hole_radius_pcb
+      where:
+        - matrix_extra_num
+      adjust:
+        shift: [7.3, 30]
+  _top_plate_drill:
+    - what: outline
+      name: _pcb_drill
+      expand: -m2_hole_radius_plate_expand
+  _case_standoff_heat_inserts:
+    - what: outline
+      name: _pcb_drill
+      expand: -m2_hole_radius_insert_expand
+  _case_standoff_thru:
+    - what: outline
+      name: _pcb_drill
+      expand: -0.1
+  _case_standoff:
+    - what: circle
+      radius: 3
+      where:
+        - ref: thumbfan_home_thumb
+          shift: [0, -U]
+    - what: circle
+      radius: 6
+      where:
+        - ref: thumbfan_near_thumb
+          shift: [-U, -U/2]
+    - what: circle
+      radius: 6
+      where:
+        - ref: thumbfan_gk2_thumb
+          shift: [0, U]
+    - what: circle
+      radius: 2
+      where: /^.*(pinky|middle|inner)_(num|bottom).*/
+      adjust:
+        shift: [-0.5*U, -0.5*U]
+  _matrix_outline:
+    - what: outline
+      name: _base_outline
+      fillet: 1
+  _case_outline:
+    - what: outline
+      name: _matrix_outline
+      expand: wall_thickness
+  _wall_outline: [_case_outline, -_matrix_outline]
+  _plate_switch_hole:
+    - what: rectangle
+      size: [plate_switch_hole, plate_switch_hole]
+      where: true
+  top_plate_outline:
+    [
+      _case_outline,
+      -_plate_switch_hole,
+      -_top_plate_drill,
+      -_promicro_slot,
+      -_trrs_slot,
+    ]
+  ibkbd_gamer_pcb: [_matrix_outline, -_pcb_drill]
+  debug_view:
+    [
+      ^_true_keys_debug,
+      ^_padded_keys,
+      ^_glue_block,
+      ^_promicro_slot,
+      ^_trrs_slot_orig,
+      ^_trrs_slot,
+      ^_base_outline,
+      ^_pcb_drill,
+      ^_top_plate_drill,
+      ^_case_standoff_heat_inserts,
+      ^_case_standoff_thru,
+      ^_case_standoff,
+      ^_matrix_outline,
+      ^_case_outline,
+      ^_wall_outline,
+      ^_plate_switch_hole,
+      ^top_plate_outline,
+      ^ibkbd_gamer_pcb,
+    ]
+cases:
+  bottom_plate:
+    - what: outline
+      name: _case_outline
+      extrude: wall_thickness
+    - what: outline
+      name: _wall_outline
+      extrude: wall_height
+      shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _case_standoff
+      operation: add
+      extrude: wall_height - pcb_thickness - switch_gap
+      shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _case_standoff_thru
+      operation: add
+      extrude: wall_height
+      shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _case_standoff_heat_inserts
+      operation: subtract
+      extrude: wall_height
+      shift: [0, 0, wall_thickness]
+    - what: outline
+      name: _trrs_slot
+      operation: subtract
+      extrude: 15
+      shift: [0, 0, wall_thickness + wall_height - switch_gap]
+  top_plate:
+    - what: outline
+      name: top_plate_outline
+      extrude: plate_thickness
+pcbs:
+  ibkbd_gamer_pcb:
+    outlines:
+      ibkbd_gamer_pcb:
+        outline: ibkbd_gamer_pcb
+    footprints:
+      keys:
+        what: mx_with_diode
+        where: true
+        params:
+          from: "{{row_net}}"
+          to: "{{column_net}}"
+          colrow: "{{colrow}}" # hack
+      trrs:
+        what: trrs
+        where:
+          ref: matrix_extra_num
+          shift: [trrs_pos_x + 1.1, trrs_pos_y - -5.05]
+          rotate: trrs_angle + 90
+        params:
+          reverse: true
+          symmetric: true
+          A: GND
+          B: GND
+          C: P9
+          D: VCC
+      promicro:
+        what: promicro
+        where:
+          ref: matrix_outer_num
+          shift: [promicro_pos_x, promicro_pos_y]
+      # # for reference
+      # keys:
+      #   what: mx
+      #   where: true
+      #   params:
+      #     keycaps: true
+      #     hotswap: true
+      #     reverse: true
+      #     from: "{{colrow}}"
+      #     to: "{{column_net}}"
+      # diodes_matrix:
+      #   what: diode
+      #   where: true
+      #   adjust:
+      #     shift: [0, -5]
+      #   params:
+      #     to: "{{row_net}}"
+      #     from: "{{colrow}}"
